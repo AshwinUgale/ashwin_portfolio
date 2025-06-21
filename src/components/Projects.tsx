@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Github, Terminal, Cloud, Database, Server, Docker } from 'lucide-react';
+import { Github, Terminal, Cloud, Database, Server, Container } from 'lucide-react';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -37,7 +36,7 @@ const Projects = () => {
       tags: ['Jenkins', 'ArgoCD', 'SonarQube', 'Docker'],
       liveUrl: '#',
       githubUrl: '#',
-      icon: Docker
+      icon: Container
     },
     {
       id: 4,

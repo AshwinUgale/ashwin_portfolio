@@ -1,5 +1,4 @@
-
-import { Cloud, Server, Database, Terminal, Docker, Github } from 'lucide-react';
+import { Cloud, Server, Database, Terminal, Container, Github } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
@@ -15,7 +14,7 @@ const Skills = () => {
     },
     {
       title: 'Container & Orchestration',
-      icon: Docker,
+      icon: Container,
       skills: [
         { name: 'Kubernetes', level: 90 },
         { name: 'Docker', level: 95 },
