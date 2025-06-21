@@ -1,6 +1,5 @@
-
 import { useState } from 'react';
-import { Mail, MapPin, User, MessageSquare } from 'lucide-react';
+import { Github, Cloud, Server, Terminal } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const Contact = () => {
@@ -25,7 +24,7 @@ const Contact = () => {
     
     toast({
       title: "Message Sent!",
-      description: "Thank you for your message. I'll get back to you soon!",
+      description: "Thank you for reaching out! I'll get back to you within 24 hours.",
     });
 
     // Reset form
@@ -36,9 +35,9 @@ const Contact = () => {
     <section id="contact" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Let's Build Together</h2>
           <p className="text-xl text-gray-600 mb-8">
-            Let's discuss your next project or just say hello!
+            Ready to optimize your infrastructure? Let's discuss your DevOps challenges!
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
         </div>
@@ -53,27 +52,27 @@ const Contact = () => {
             <div className="space-y-6">
               <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
                 <div className="bg-blue-100 p-3 rounded-full">
-                  <Mail className="text-blue-600" size={24} />
+                  <Terminal className="text-blue-600" size={24} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Email</h4>
-                  <p className="text-gray-600">john.doe@example.com</p>
+                  <p className="text-gray-600">alex.chen@devops.com</p>
                 </div>
               </div>
               
               <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
                 <div className="bg-blue-100 p-3 rounded-full">
-                  <MapPin className="text-blue-600" size={24} />
+                  <Cloud className="text-blue-600" size={24} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Location</h4>
-                  <p className="text-gray-600">San Francisco, CA</p>
+                  <p className="text-gray-600">Seattle, WA (Remote Available)</p>
                 </div>
               </div>
               
               <div className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-sm">
                 <div className="bg-blue-100 p-3 rounded-full">
-                  <MessageSquare className="text-blue-600" size={24} />
+                  <Server className="text-blue-600" size={24} />
                 </div>
                 <div>
                   <h4 className="font-semibold text-gray-900">Response Time</h4>
@@ -82,17 +81,17 @@ const Contact = () => {
               </div>
             </div>
 
-            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl">
+            <div className="bg-gradient-to-br from-blue-50 to-slate-50 p-8 rounded-2xl">
               <h4 className="text-lg font-semibold text-gray-900 mb-4">
-                Available for Freelance Work
+                Available for DevOps Consulting
               </h4>
               <p className="text-gray-600 mb-4">
-                I'm currently available for freelance projects and full-time opportunities. 
-                Let's create something amazing together!
+                I'm currently available for DevOps consulting, cloud migration projects, 
+                and infrastructure optimization. Let's automate your deployment pipeline!
               </p>
               <div className="flex space-x-4">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                <span className="text-sm text-gray-600">Available now</span>
+                <span className="text-sm text-gray-600">Available for new projects</span>
               </div>
             </div>
           </div>
@@ -106,7 +105,7 @@ const Contact = () => {
                     Name
                   </label>
                   <div className="relative">
-                    <User className="absolute left-3 top-3 text-gray-400" size={20} />
+                    <Terminal className="absolute left-3 top-3 text-gray-400" size={20} />
                     <input
                       type="text"
                       id="name"
@@ -125,7 +124,7 @@ const Contact = () => {
                     Email
                   </label>
                   <div className="relative">
-                    <Mail className="absolute left-3 top-3 text-gray-400" size={20} />
+                    <Github className="absolute left-3 top-3 text-gray-400" size={20} />
                     <input
                       type="email"
                       id="email"
@@ -142,7 +141,7 @@ const Contact = () => {
               
               <div>
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-2">
-                  Subject
+                  Project Type
                 </label>
                 <input
                   type="text"
@@ -152,13 +151,13 @@ const Contact = () => {
                   onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors"
-                  placeholder="What's this about?"
+                  placeholder="Cloud Migration, CI/CD Setup, Infrastructure Audit..."
                 />
               </div>
               
               <div>
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                  Message
+                  Project Details
                 </label>
                 <textarea
                   id="message"
@@ -168,7 +167,7 @@ const Contact = () => {
                   required
                   rows={5}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors resize-none"
-                  placeholder="Tell me about your project..."
+                  placeholder="Tell me about your infrastructure challenges and goals..."
                 />
               </div>
               
