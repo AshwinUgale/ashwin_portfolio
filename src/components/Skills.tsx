@@ -1,7 +1,28 @@
+
 import { Cloud, Server, Database, Terminal, Container, Github } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
+    {
+      title: 'Frontend Development',
+      icon: Terminal,
+      skills: [
+        { name: 'React', level: 95 },
+        { name: 'TypeScript', level: 90 },
+        { name: 'Next.js', level: 85 },
+        { name: 'Tailwind CSS', level: 90 }
+      ]
+    },
+    {
+      title: 'Backend Development',
+      icon: Database,
+      skills: [
+        { name: 'Node.js', level: 90 },
+        { name: 'Python', level: 85 },
+        { name: 'PostgreSQL', level: 88 },
+        { name: 'MongoDB', level: 82 }
+      ]
+    },
     {
       title: 'Cloud Platforms',
       icon: Cloud,
@@ -41,26 +62,6 @@ const Skills = () => {
         { name: 'GitHub Actions', level: 88 },
         { name: 'ArgoCD', level: 82 }
       ]
-    },
-    {
-      title: 'Monitoring & Observability',
-      icon: Database,
-      skills: [
-        { name: 'Prometheus', level: 90 },
-        { name: 'Grafana', level: 88 },
-        { name: 'ELK Stack', level: 85 },
-        { name: 'Datadog', level: 80 }
-      ]
-    },
-    {
-      title: 'Operating Systems',
-      icon: Server,
-      skills: [
-        { name: 'Linux', level: 95 },
-        { name: 'Ubuntu/Debian', level: 90 },
-        { name: 'CentOS/RHEL', level: 85 },
-        { name: 'Windows Server', level: 75 }
-      ]
     }
   ];
 
@@ -70,7 +71,7 @@ const Skills = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 mb-4">Technical Skills</h2>
           <p className="text-xl text-gray-600 mb-8">
-            Cloud platforms, DevOps tools, and technologies I work with
+            Full-stack development and DevOps technologies I work with
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
         </div>
@@ -116,8 +117,8 @@ const Skills = () => {
         {/* Certifications and stats */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 mb-2">15+</div>
-            <div className="text-gray-600">Cloud Projects</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">20+</div>
+            <div className="text-gray-600">Projects Completed</div>
           </div>
           <div className="text-center">
             <div className="text-3xl font-bold text-blue-600 mb-2">6+</div>

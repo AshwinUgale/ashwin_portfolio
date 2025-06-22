@@ -33,17 +33,17 @@ const Hero = () => {
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 mb-4 max-w-3xl mx-auto">
-            DevOps Engineer & Cloud Architect
+            Full-Stack Developer & DevOps Engineer
           </p>
           <p className="text-lg text-gray-500 mb-8 max-w-2xl mx-auto">
-            Automating infrastructure, optimizing CI/CD pipelines, and building scalable cloud solutions on AWS, Azure, and GCP
+            Building scalable web applications and automating infrastructure with modern technologies, CI/CD pipelines, and cloud platforms
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => scrollToSection('projects')}
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transform hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl"
             >
-              View My Infrastructure
+              View My Projects
             </button>
             <button
               onClick={() => scrollToSection('contact')}

@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { Github, Terminal, Cloud, Database, Server, Container } from 'lucide-react';
 
@@ -7,6 +8,17 @@ const Projects = () => {
   const projects = [
     {
       id: 1,
+      title: 'TaskFlow - Full-Stack Project Management Platform',
+      description: 'Built a comprehensive project management SaaS with React, Node.js, PostgreSQL, and Redis. Features real-time collaboration, file uploads, advanced analytics, and automated deployment with Docker and Kubernetes.',
+      image: 'https://images.unsplash.com/photo-1611224923853-80b023f02d71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
+      category: 'Full-Stack Application',
+      tags: ['React', 'Node.js', 'PostgreSQL', 'Docker', 'K8s'],
+      liveUrl: '#',
+      githubUrl: '#',
+      icon: Database
+    },
+    {
+      id: 2,
       title: 'Multi-Cloud Kubernetes Platform',
       description: 'Designed and deployed a production-grade Kubernetes cluster across AWS, Azure, and GCP with automated scaling, monitoring, and disaster recovery capabilities.',
       image: 'https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -17,7 +29,7 @@ const Projects = () => {
       icon: Server
     },
     {
-      id: 2,
+      id: 3,
       title: 'Infrastructure as Code Pipeline',
       description: 'Built comprehensive IaC solution using Terraform and Ansible for provisioning AWS infrastructure with GitOps workflow and automated testing.',
       image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -28,7 +40,7 @@ const Projects = () => {
       icon: Terminal
     },
     {
-      id: 3,
+      id: 4,
       title: 'Cloud-Native CI/CD Platform',
       description: 'Implemented enterprise-grade CI/CD pipeline using Jenkins, Docker, and ArgoCD with automated testing, security scanning, and deployment strategies.',
       image: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -39,7 +51,7 @@ const Projects = () => {
       icon: Container
     },
     {
-      id: 4,
+      id: 5,
       title: 'AWS Cost Optimization Suite',
       description: 'Developed automated cost optimization tools that reduced cloud spending by 40% through right-sizing, spot instances, and resource scheduling.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -50,7 +62,7 @@ const Projects = () => {
       icon: Cloud
     },
     {
-      id: 5,
+      id: 6,
       title: 'Microservices Monitoring Stack',
       description: 'Deployed comprehensive observability solution with Prometheus, Grafana, Jaeger, and ELK stack for distributed tracing and log aggregation.',
       image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
@@ -59,21 +71,10 @@ const Projects = () => {
       liveUrl: '#',
       githubUrl: '#',
       icon: Database
-    },
-    {
-      id: 6,
-      title: 'Serverless Data Pipeline',
-      description: 'Built scalable data processing pipeline using AWS Lambda, Step Functions, and EventBridge for real-time analytics and machine learning workflows.',
-      image: 'https://images.unsplash.com/photo-1518186285589-2f7649de83e0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
-      category: 'Serverless Architecture',
-      tags: ['AWS Lambda', 'Step Functions', 'EventBridge', 'S3'],
-      liveUrl: '#',
-      githubUrl: '#',
-      icon: Server
     }
   ];
 
-  const categories = ['All', 'Container Orchestration', 'Infrastructure Automation', 'CI/CD', 'Cloud Optimization', 'Monitoring & Observability', 'Serverless Architecture'];
+  const categories = ['All', 'Full-Stack Application', 'Container Orchestration', 'Infrastructure Automation', 'CI/CD', 'Cloud Optimization', 'Monitoring & Observability'];
 
   const filteredProjects = activeFilter === 'All' 
     ? projects 
@@ -83,9 +84,9 @@ const Projects = () => {
     <section id="projects" className="py-20 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">DevOps Projects</h2>
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
           <p className="text-xl text-gray-600 mb-8">
-            Infrastructure automation, cloud architecture, and DevOps solutions I've built
+            Full-stack applications and DevOps solutions I've built
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
         </div>

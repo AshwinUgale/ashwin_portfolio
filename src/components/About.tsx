@@ -14,17 +14,17 @@ const About = () => {
           <div className="space-y-6">
             <div className="bg-gradient-to-br from-blue-50 to-slate-100 p-8 rounded-2xl">
               <h3 className="text-2xl font-semibold text-gray-900 mb-4">
-                Infrastructure Automation Expert
+                Full-Stack Developer & DevOps Engineer
               </h3>
               <p className="text-gray-600 leading-relaxed mb-4">
-                I'm a passionate DevOps engineer with over 6 years of experience designing and 
-                implementing scalable cloud infrastructure. I specialize in automating deployment 
-                pipelines, managing containerized applications, and optimizing cloud costs.
+                I'm a passionate full-stack developer with over 6 years of experience building 
+                scalable web applications and automating infrastructure. I specialize in modern 
+                web technologies, cloud platforms, and DevOps practices to deliver end-to-end solutions.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                My expertise spans across AWS, Azure, and GCP, with deep knowledge in Kubernetes, 
-                Docker, Terraform, and modern CI/CD practices. I believe in Infrastructure as Code 
-                and continuous improvement of development workflows.
+                My expertise spans from React and Node.js development to Kubernetes orchestration 
+                and CI/CD automation. I believe in writing clean, maintainable code while ensuring 
+                robust deployment pipelines and infrastructure as code.
               </p>
             </div>
 
@@ -39,15 +39,15 @@ const About = () => {
               <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
                 <Server className="text-blue-600" size={20} />
                 <div>
-                  <p className="text-sm text-gray-500">Cloud Platforms</p>
-                  <p className="font-semibold">AWS, Azure, GCP</p>
+                  <p className="text-sm text-gray-500">Specialization</p>
+                  <p className="font-semibold">Full-Stack & DevOps</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-gray-50 rounded-lg">
                 <Database className="text-blue-600" size={20} />
                 <div>
-                  <p className="text-sm text-gray-500">Specialization</p>
-                  <p className="font-semibold">K8s & Docker</p>
+                  <p className="text-sm text-gray-500">Focus</p>
+                  <p className="font-semibold">Scalable Solutions</p>
                 </div>
               </div>
             </div>
@@ -57,7 +57,7 @@ const About = () => {
             <div className="relative z-10 bg-white p-8 rounded-2xl shadow-xl">
               <img
                 src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-                alt="DevOps Infrastructure"
+                alt="Full-Stack Development"
                 className="w-full h-96 object-cover rounded-xl"
               />
             </div>
