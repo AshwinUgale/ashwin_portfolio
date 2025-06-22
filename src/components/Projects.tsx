@@ -81,11 +81,11 @@ const Projects = () => {
     : projects.filter(project => project.category === activeFilter);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Featured Projects</h2>
-          <p className="text-xl text-gray-600 mb-8">
+          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Featured Projects</h2>
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
             Full-stack applications and DevOps solutions I've built
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
@@ -100,7 +100,7 @@ const Projects = () => {
               className={`px-4 py-2 rounded-full font-medium transition-all duration-200 text-sm ${
                 activeFilter === category
                   ? 'bg-blue-600 text-white shadow-lg'
-                  : 'bg-white text-gray-600 hover:bg-blue-50 hover:text-blue-600'
+                  : 'bg-white dark:bg-gray-700 text-gray-600 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-600 hover:text-blue-600 dark:hover:text-blue-400'
               }`}
             >
               {category}
@@ -115,7 +115,7 @@ const Projects = () => {
             return (
               <div
                 key={project.id}
-                className="bg-white rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
+                className="bg-white dark:bg-gray-700 rounded-2xl shadow-lg overflow-hidden group hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2"
               >
                 <div className="relative overflow-hidden">
                   <img
@@ -138,27 +138,27 @@ const Projects = () => {
                     </a>
                   </div>
                   <div className="absolute top-4 left-4">
-                    <div className="bg-white/90 p-2 rounded-full">
-                      <IconComponent size={20} className="text-blue-600" />
+                    <div className="bg-white/90 dark:bg-gray-800/90 p-2 rounded-full">
+                      <IconComponent size={20} className="text-blue-600 dark:text-blue-400" />
                     </div>
                   </div>
                 </div>
                 
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="text-lg font-semibold text-gray-900">{project.title}</h3>
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{project.title}</h3>
                   </div>
-                  <span className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded-full mb-3 inline-block">
+                  <span className="text-xs text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900 px-2 py-1 rounded-full mb-3 inline-block">
                     {project.category}
                   </span>
                   
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-3">{project.description}</p>
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-3">{project.description}</p>
                   
                   <div className="flex flex-wrap gap-1">
                     {project.tags.map((tag, index) => (
                       <span
                         key={index}
-                        className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full"
+                        className="text-xs bg-gray-100 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-2 py-1 rounded-full"
                       >
                         {tag}
                       </span>
