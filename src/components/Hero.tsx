@@ -29,14 +29,14 @@ const Hero = () => {
           <h1 className="text-5xl md:text-7xl font-bold text-gray-900 dark:text-white mb-6">
             Hi, I'm{' '}
             <span className="bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
-              Alex Chen
+              Ashwin Ugale
             </span>
           </h1>
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-300 mb-4 max-w-3xl mx-auto">
-            Full-Stack Developer & DevOps Engineer
+            Recent CS Graduate & Full-Stack Developer
           </p>
           <p className="text-lg text-gray-500 dark:text-gray-400 mb-8 max-w-2xl mx-auto">
-            Building scalable web applications and automating infrastructure with modern technologies, CI/CD pipelines, and cloud platforms
+            Building scalable web applications and cloud-native solutions with modern technologies, CI/CD pipelines, and microservices architecture
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
@@ -49,7 +49,7 @@ const Hero = () => {
               onClick={() => scrollToSection('contact')}
               className="border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-white transform hover:scale-105 transition-all duration-200"
             >
-              Let's Collaborate
+              Let's Connect
             </button>
           </div>
         </div>

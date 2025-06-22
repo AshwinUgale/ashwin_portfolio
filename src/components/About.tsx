@@ -1,5 +1,5 @@
 
-import { Cloud, Database, Server } from 'lucide-react';
+import { Cloud, Database, Server, GraduationCap } from 'lucide-react';
 
 const About = () => {
   return (
@@ -14,32 +14,32 @@ const About = () => {
           <div className="space-y-6">
             <div className="bg-gradient-to-br from-blue-50 to-slate-100 dark:from-gray-800 dark:to-gray-700 p-8 rounded-2xl">
               <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-4">
-                Full-Stack Developer & DevOps Engineer
+                Recent CS Graduate & Full-Stack Developer
               </h3>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
-                I'm a passionate full-stack developer with over 6 years of experience building 
-                scalable web applications and automating infrastructure. I specialize in modern 
-                web technologies, cloud platforms, and DevOps practices to deliver end-to-end solutions.
+                I'm a passionate full-stack developer with a Master's in Computer Science from Indiana University 
+                and hands-on experience in building cloud-native applications. I specialize in modern web 
+                technologies and DevOps practices to deliver scalable solutions.
               </p>
               <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-                My expertise spans from React and Node.js development to Kubernetes orchestration 
-                and CI/CD automation. I believe in writing clean, maintainable code while ensuring 
-                robust deployment pipelines and infrastructure as code.
+                My experience spans from React and Node.js development to Kubernetes orchestration 
+                and CI/CD automation. I'm eager to contribute to innovative projects and continue 
+                growing my expertise in full-stack development and cloud technologies.
               </p>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
               <div className="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
-                <Cloud className="text-blue-600" size={20} />
+                <GraduationCap className="text-blue-600" size={20} />
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Experience</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">6+ Years</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Education</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">MS in CS</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3 p-4 bg-gray-50 dark:bg-gray-800 rounded-lg">
                 <Server className="text-blue-600" size={20} />
                 <div>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">Specialization</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Experience</p>
                   <p className="font-semibold text-gray-900 dark:text-white">Full-Stack & DevOps</p>
                 </div>
               </div>
@@ -47,7 +47,7 @@ const About = () => {
                 <Database className="text-blue-600" size={20} />
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Focus</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">Scalable Solutions</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">Cloud Solutions</p>
                 </div>
               </div>
             </div>

@@ -1,37 +1,37 @@
 
-import { Cloud, Server, Database, Terminal, Container, Github } from 'lucide-react';
+import { Cloud, Server, Database, Terminal, Container, Github, Code, Brain } from 'lucide-react';
 
 const Skills = () => {
   const skillCategories = [
     {
-      title: 'Frontend Development',
-      icon: Terminal,
-      skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS']
+      title: 'Programming Languages',
+      icon: Code,
+      skills: ['Python', 'Java', 'C++', 'C', 'JavaScript', 'PHP', 'R']
     },
     {
-      title: 'Backend Development',
+      title: 'Web Development',
+      icon: Terminal,
+      skills: ['React', 'Node.js', 'Spring Boot', 'Express', 'HTML/CSS', 'Bootstrap', 'TypeScript']
+    },
+    {
+      title: 'Databases',
       icon: Database,
-      skills: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB']
+      skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Firebase', 'Redis', 'Oracle']
     },
     {
-      title: 'Cloud Platforms',
+      title: 'Cloud & DevOps',
       icon: Cloud,
-      skills: ['AWS', 'Azure', 'Google Cloud', 'DigitalOcean']
+      skills: ['GCP', 'AWS (EC2, S3, EKS, RDS)', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD']
     },
     {
-      title: 'Container & Orchestration',
-      icon: Container,
-      skills: ['Kubernetes', 'Docker', 'Helm', 'Istio']
+      title: 'Machine Learning & Data',
+      icon: Brain,
+      skills: ['Machine Learning', 'Data Analysis', 'Random Forest', 'Gradient Boosting', 'Python ML Libraries']
     },
     {
-      title: 'Infrastructure as Code',
-      icon: Terminal,
-      skills: ['Terraform', 'Ansible', 'CloudFormation', 'Pulumi']
-    },
-    {
-      title: 'CI/CD & Automation',
+      title: 'Tools & Practices',
       icon: Github,
-      skills: ['Jenkins', 'GitLab CI', 'GitHub Actions', 'ArgoCD']
+      skills: ['Git', 'Agile', 'Postman', 'REST APIs', 'Microservices', 'Linux/UNIX', 'Shell Scripting']
     }
   ];
 
@@ -41,7 +41,7 @@ const Skills = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">Technical Skills</h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">
-            Full-stack development and DevOps technologies I work with
+            Technologies and tools I work with
           </p>
           <div className="w-24 h-1 bg-blue-600 mx-auto rounded-full"></div>
         </div>
@@ -78,23 +78,23 @@ const Skills = () => {
           })}
         </div>
 
-        {/* Certifications and stats */}
+        {/* Stats section updated for recent graduate */}
         <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8">
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">20+</div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">10+</div>
             <div className="text-gray-600 dark:text-gray-300">Projects Completed</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">6+</div>
-            <div className="text-gray-600 dark:text-gray-300">Years Experience</div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3</div>
+            <div className="text-gray-600 dark:text-gray-300">Internships</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">5</div>
-            <div className="text-gray-600 dark:text-gray-300">AWS Certifications</div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">MS</div>
+            <div className="text-gray-600 dark:text-gray-300">Computer Science</div>
           </div>
           <div className="text-center">
-            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">99.9%</div>
-            <div className="text-gray-600 dark:text-gray-300">Uptime Achievement</div>
+            <div className="text-3xl font-bold text-blue-600 dark:text-blue-400 mb-2">3.6</div>
+            <div className="text-gray-600 dark:text-gray-300">GPA</div>
           </div>
         </div>
       </div>
