@@ -6,62 +6,32 @@ const Skills = () => {
     {
       title: 'Frontend Development',
       icon: Terminal,
-      skills: [
-        { name: 'React', level: 95 },
-        { name: 'TypeScript', level: 90 },
-        { name: 'Next.js', level: 85 },
-        { name: 'Tailwind CSS', level: 90 }
-      ]
+      skills: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS']
     },
     {
       title: 'Backend Development',
       icon: Database,
-      skills: [
-        { name: 'Node.js', level: 90 },
-        { name: 'Python', level: 85 },
-        { name: 'PostgreSQL', level: 88 },
-        { name: 'MongoDB', level: 82 }
-      ]
+      skills: ['Node.js', 'Python', 'PostgreSQL', 'MongoDB']
     },
     {
       title: 'Cloud Platforms',
       icon: Cloud,
-      skills: [
-        { name: 'AWS', level: 95 },
-        { name: 'Azure', level: 85 },
-        { name: 'Google Cloud', level: 80 },
-        { name: 'DigitalOcean', level: 75 }
-      ]
+      skills: ['AWS', 'Azure', 'Google Cloud', 'DigitalOcean']
     },
     {
       title: 'Container & Orchestration',
       icon: Container,
-      skills: [
-        { name: 'Kubernetes', level: 90 },
-        { name: 'Docker', level: 95 },
-        { name: 'Helm', level: 85 },
-        { name: 'Istio', level: 75 }
-      ]
+      skills: ['Kubernetes', 'Docker', 'Helm', 'Istio']
     },
     {
       title: 'Infrastructure as Code',
       icon: Terminal,
-      skills: [
-        { name: 'Terraform', level: 90 },
-        { name: 'Ansible', level: 85 },
-        { name: 'CloudFormation', level: 80 },
-        { name: 'Pulumi', level: 70 }
-      ]
+      skills: ['Terraform', 'Ansible', 'CloudFormation', 'Pulumi']
     },
     {
       title: 'CI/CD & Automation',
       icon: Github,
-      skills: [
-        { name: 'Jenkins', level: 90 },
-        { name: 'GitLab CI', level: 85 },
-        { name: 'GitHub Actions', level: 88 },
-        { name: 'ArgoCD', level: 82 }
-      ]
+      skills: ['Jenkins', 'GitLab CI', 'GitHub Actions', 'ArgoCD']
     }
   ];
 
@@ -82,7 +52,7 @@ const Skills = () => {
             return (
               <div
                 key={categoryIndex}
-                className="bg-gradient-to-br from-slate-50 to-gray-50 p-8 rounded-2xl border border-gray-100"
+                className="bg-gradient-to-br from-slate-50 to-gray-50 p-8 rounded-2xl border border-gray-100 hover:shadow-lg transition-shadow duration-300"
               >
                 <div className="flex items-center mb-6">
                   <div className="bg-blue-100 p-3 rounded-full mr-4">
@@ -93,20 +63,14 @@ const Skills = () => {
                   </h3>
                 </div>
                 
-                <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex justify-between items-center">
-                        <span className="text-gray-700 font-medium">{skill.name}</span>
-                        <span className="text-blue-600 font-semibold">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
-                        <div
-                          className="bg-gradient-to-r from-blue-500 to-blue-600 h-2 rounded-full transition-all duration-1000 ease-out"
-                          style={{ width: `${skill.level}%` }}
-                        ></div>
-                      </div>
-                    </div>
+                    <span
+                      key={skillIndex}
+                      className="inline-block bg-white px-3 py-2 rounded-lg text-gray-700 font-medium border border-gray-200 hover:border-blue-300 hover:bg-blue-50 transition-colors duration-200"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>
