@@ -47,7 +47,7 @@ const About = () => {
                 <Database className="text-blue-600" size={20} />
                 <div>
                   <p className="text-sm text-gray-500 dark:text-gray-400">Focus</p>
-                  <p className="font-semibold text-gray-900 dark:text-white">Cloud Solutions</p>
+                  <p className="font-semibold text-gray-900 dark:text-white">Backend Development</p>
                 </div>
               </div>
             </div>
