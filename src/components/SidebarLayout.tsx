@@ -80,7 +80,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
         <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
         <a
-          href={resumePath}
+          href="/resume"
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
@@ -195,7 +195,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
                 <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
                 <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
                 <a
-                  href={resumePath}
+                  href="/resume"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
