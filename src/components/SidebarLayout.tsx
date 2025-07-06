@@ -7,7 +7,6 @@ const navLinks = [
   { name: 'Experience', href: '#experience', id: 'experience' },
   { name: 'Education', href: '#education', id: 'education' },
   { name: 'Skills', href: '#skills', id: 'skills' },
-  { name: 'Contact', href: '#contact', id: 'contact' },
 ];
 
 const socialLinks = [
@@ -78,13 +77,13 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col gap-y-6 w-full">
       <div className="w-full">
         <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">Ashwin Ugale</h1>
-        <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Full Stack Developer</h2>
-        <p className="text-slate-400 text-base mb-6">I build accessible, pixel-perfect digital experiences for the web.</p>
+        <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
+        <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
         <a
           href={resumePath}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block w-full text-left bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-lg transition-colors duration-200 shadow-md mb-4 text-base"
+          className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
           style={{ letterSpacing: '0.04em' }}
         >
           View Resume
@@ -189,10 +188,62 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         </div>
         {/* Desktop Sidebar */}
         <aside className="hidden md:flex flex-col justify-between items-start w-[520px] px-20 py-16 fixed inset-y-0 left-0 z-30 h-screen text-left bg-transparent">
-          {SidebarContent}
+          <div className="flex flex-col justify-between h-full w-full">
+            <div>
+              <div className="w-full">
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">Ashwin Ugale</h1>
+                <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
+                <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
+                <a
+                  href={resumePath}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
+                  style={{ letterSpacing: '0.04em' }}
+                >
+                  View Resume
+                </a>
+              </div>
+              <div className="flex-1 flex flex-col justify-center w-full">
+                <nav className="space-y-2 w-full flex flex-col items-start">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={e => handleNavClick(e, link.href, link.id)}
+                      className={`flex items-center gap-3 py-2 text-base sm:text-lg font-semibold transition-colors pl-0 w-full
+                        ${activeSection === link.id
+                          ? 'text-white font-bold translate-x-2 transition-transform duration-200'
+                          : 'text-slate-400 font-medium'}
+                      `}
+                      style={{ letterSpacing: '0.05em' }}
+                    >
+                      <span className={activeSection === link.id ? 'text-white' : 'text-slate-400'}>
+                        {link.name.toUpperCase()}
+                      </span>
+                    </a>
+                  ))}
+                </nav>
+              </div>
+            </div>
+            <div className="flex gap-x-6 items-center w-full mt-8">
+              {socialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={social.label}
+                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                >
+                  <social.icon size={22} />
+                </a>
+              ))}
+            </div>
+          </div>
         </aside>
         {/* Main Content: pt-16 on mobile, md:pt-0 */}
-        <main className="flex-1 min-h-screen px-4 md:px-16 py-8 md:py-20 md:ml-[540px] bg-transparent pt-16 md:pt-0">
+        <main className="flex-1 min-h-screen px-4 md:px-16 py-8 md:py-20 md:ml-[540px] bg-transparent pt-16 md:pt-0 overflow-y-auto scroll-container">
           {children}
         </main>
       </div>

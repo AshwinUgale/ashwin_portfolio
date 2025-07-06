@@ -7,18 +7,14 @@ const About = () => {
       <div className="max-w-4xl mx-auto px-4">
         <div className="space-y-10">
           <div>
-            <h3 className="text-2xl font-semibold text-blue-400 mb-4">
-              Recent CS Graduate & Full-Stack Developer
-            </h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              I'm a passionate full-stack developer with a Master's in Computer Science from Indiana University 
-              and hands-on experience in building cloud-native applications. I specialize in modern web 
-              technologies and DevOps practices to deliver scalable solutions.
+              I'm a Software Engineer with a strong background in full-stack development, cloud infrastructure, and DevOps. I specialize in building scalable systems across the stack—developing frontend interfaces with React, backend services with Java, Spring Boot, and Node.js. I’ve deployed applications on AWS and GCP using Docker, Kubernetes, and CI/CD pipelines, with a focus on clean deployments, secure APIs, and workflow automation.
+            </p>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              What drives me is solving real-world engineering problems and optimizing workflows. Whether it's reducing deployment friction, improving infrastructure resilience, or automating routine tasks, I enjoy working across the stack to bring clarity and efficiency to complex systems.
             </p>
             <p className="text-gray-400 leading-relaxed">
-              My experience spans from React and Node.js development to Kubernetes orchestration 
-              and CI/CD automation. I'm eager to contribute to innovative projects and continue 
-              growing my expertise in full-stack development and cloud technologies.
+              I hold a Master’s degree in Computer Science from Indiana University and continuously seek opportunities to learn, build, and contribute to impactful software projects.
             </p>
           </div>
         </div>

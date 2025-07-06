@@ -1,71 +1,54 @@
 
-import { Cloud, Server, Database, Terminal, Container, Github, Code, Brain } from 'lucide-react';
+import React from 'react';
 
-const skillCategories = [
+const skills = [
   {
-    title: 'Programming Languages',
-    icon: Code,
-    skills: ['Python', 'Java', 'C++', 'C', 'JavaScript', 'PHP', 'R']
+    category: 'Programming Languages',
+    items: ['Python', 'Java', 'C++', 'C', 'PHP', 'R'],
   },
   {
-    title: 'Web Development',
-    icon: Terminal,
-    skills: ['React', 'Node.js', 'Spring Boot', 'Express', 'HTML/CSS', 'Bootstrap', 'TypeScript']
+    category: 'Operating Systems',
+    items: ['Linux', 'UNIX', 'BSD', 'Shell Scripting'],
   },
   {
-    title: 'Databases',
-    icon: Database,
-    skills: ['MongoDB', 'PostgreSQL', 'MySQL', 'Firebase', 'Redis', 'Oracle']
+    category: 'Networking',
+    items: ['TCP/IP', 'Load Balancing', 'HTTP', 'DNS', 'CDN'],
   },
   {
-    title: 'Cloud & DevOps',
-    icon: Cloud,
-    skills: ['GCP', 'AWS (EC2, S3, EKS, RDS)', 'Docker', 'Kubernetes', 'GitHub Actions', 'CI/CD']
+    category: 'Databases',
+    items: ['SQL', 'MongoDB', 'Firebase', 'RDBMS', 'Oracle', 'MySQL', 'PostgreSQL'],
   },
   {
-    title: 'Machine Learning & Data',
-    icon: Brain,
-    skills: ['Machine Learning', 'Data Analysis', 'Random Forest', 'Gradient Boosting', 'Python ML Libraries']
+    category: 'Web Development',
+    items: ['React', 'Node.js', 'Spring Boot', 'Express', 'Bootstrap', 'HTML', 'CSS', 'JavaScript', 'MERN'],
   },
   {
-    title: 'Tools & Practices',
-    icon: Github,
-    skills: ['Git', 'Agile', 'Postman', 'REST APIs', 'Microservices', 'Linux/UNIX', 'Shell Scripting']
-  }
+    category: 'Cloud & DevOps',
+    items: ['GCP', 'AWS', 'Docker', 'Kubernetes', 'GitHub Actions', 'Helm', 'Prometheus', 'Grafana', 'CI/CD'],
+  },
+  {
+    category: 'Tools & Practices',
+    items: ['Agile', 'Git', 'Postman', 'REST APIs', 'Microservice Architecture', 'Data Structures & Algorithms'],
+  },
 ];
 
 const Skills = () => {
   return (
-    <section id="skills" className="py-16 md:py-28">
+    <section id="skills" className="py-10 md:py-24">
       <div className="max-w-4xl mx-auto px-4">
-        <div className="flex flex-col gap-12">
-          <div className="group flex flex-col gap-3 p-0">
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-              {skillCategories.map((category, idx) => {
-                const IconComponent = category.icon;
-                return (
-                  <div key={idx} className="flex flex-col gap-3">
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-blue-700/20">
-                        <IconComponent className="text-blue-400" size={22} />
-                      </span>
-                      <span className="text-base font-semibold text-white">{category.title}</span>
-                    </div>
-                    <div className="flex flex-wrap gap-3">
-                      {category.skills.map((skill, skillIdx) => (
-                        <span
-                          key={skillIdx}
-                          className="text-sm px-3 py-1.5 rounded bg-white/5 text-gray-200"
-                        >
-                          {skill}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {skills.map((skill, idx) => (
+            <div key={skill.category}>
+              <h4 className="text-lg font-semibold text-blue-300 mb-2">{skill.category}</h4>
+              <div className="flex flex-wrap gap-2">
+                {skill.items.map((item) => (
+                  <span key={item} className="text-sm bg-white/5 text-gray-200 px-3 py-1.5 rounded">
+                    {item}
+                  </span>
+                ))}
+              </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
