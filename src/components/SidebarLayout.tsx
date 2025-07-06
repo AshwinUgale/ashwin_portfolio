@@ -191,7 +191,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
           <div className="flex flex-col justify-between h-full w-full">
             <div>
               <div className="w-full">
-                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">Ashwin Ugale</h1>
+                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Ashwin Ugale</h1>
                 <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
                 <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
                 <a
