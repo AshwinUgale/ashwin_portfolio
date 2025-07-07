@@ -28,7 +28,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 120) {
+          if (rect.top <= 300) {
             current = id;
           }
         }
@@ -127,6 +127,16 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
     </div>
   );
 
+  // Prevent background scroll when drawer is open
+  useEffect(() => {
+    if (drawerOpen) {
+      document.body.classList.add('overflow-hidden');
+    } else {
+      document.body.classList.remove('overflow-hidden');
+    }
+    return () => document.body.classList.remove('overflow-hidden');
+  }, [drawerOpen]);
+
   return (
     <div className="min-h-screen flex bg-transparent text-white relative">
       {/* Minimal, professional background with soft torch effect */}
@@ -162,7 +172,7 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
             <span className="mx-2 text-blue-400 font-semibold">|</span>
             <span className="text-base font-semibold text-slate-200">{currentSectionName}</span>
           </span>
-          <button onClick={() => setDrawerOpen(true)} aria-label="Open menu">
+          <button onClick={() => setDrawerOpen((open) => !open)} aria-label="Toggle menu">
             <Menu size={32} />
           </button>
         </div>
@@ -178,12 +188,64 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
           ></div>
           {/* Drawer */}
           <aside
-            className={`absolute top-0 left-0 h-full w-[340px] max-w-[90vw] bg-[#0a1626] shadow-2xl flex flex-col p-8 pt-10 transition-transform duration-300 rounded-r-2xl ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`absolute top-0 left-0 h-full w-[340px] max-w-[90vw] bg-[#0a1626] shadow-2xl flex flex-col p-4 pt-24 md:p-8 md:pt-10 transition-transform duration-300 rounded-r-2xl ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
           >
             <button className="absolute top-4 right-4" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
               <X size={28} />
             </button>
-            {SidebarContent}
+            {/* Mobile Sidebar Content (customized for mobile) */}
+            <div className="flex flex-col gap-y-4 w-full">
+              <div className="w-full">
+                <h1 className="text-2xl font-extrabold tracking-tight mb-1 leading-tight">Ashwin Ugale</h1>
+                <h2 className="text-base font-semibold text-blue-200 mb-1">Software Engineer</h2>
+                <p className="text-slate-400 text-sm mb-4">Building scalable software and cloud infrastructure that powers real-world systems.</p>
+                <a
+                  href="/resume"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block w-full text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-2 text-sm border border-blue-500/20"
+                  style={{ letterSpacing: '0.04em' }}
+                >
+                  View Resume
+                </a>
+              </div>
+              <div className="flex-1 flex flex-col justify-center w-full">
+                <nav className="space-y-1 w-full flex flex-col items-start">
+                  {navLinks.map((link) => (
+                    <a
+                      key={link.name}
+                      href={link.href}
+                      onClick={e => handleNavClick(e, link.href, link.id)}
+                      className={`flex items-center gap-2 py-2 text-sm font-semibold transition-colors pl-0 w-full rounded-md
+                        ${activeSection === link.id
+                          ? 'text-white font-bold bg-blue-500/10 border-l-4 border-blue-400 pl-2'
+                          : 'text-slate-400 font-medium pl-4'}
+                      `}
+                      style={{ letterSpacing: '0.05em' }}
+                    >
+                      <span className={activeSection === link.id ? 'text-white' : 'text-slate-400'}>
+                        {link.name.toUpperCase()}
+                      </span>
+                    </a>
+                  ))}
+                </nav>
+              </div>
+              <hr className="my-4 border-slate-700/40" />
+              <div className="flex gap-x-4 items-center w-full mt-2">
+                {socialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
+                  >
+                    <social.icon size={18} />
+                  </a>
+                ))}
+              </div>
+            </div>
           </aside>
         </div>
         {/* Desktop Sidebar */}
@@ -244,7 +306,11 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
         </aside>
         {/* Main Content: pt-16 on mobile, md:pt-0 */}
         <main className="flex-1 min-h-screen px-4 md:px-16 py-8 md:py-20 md:ml-[540px] bg-transparent pt-16 md:pt-0 overflow-y-auto scroll-container">
-          {children}
+          {React.Children.map(children, child =>
+            React.isValidElement(child)
+              ? React.cloneElement(child, { activeSection })
+              : child
+          )}
         </main>
       </div>
     </div>

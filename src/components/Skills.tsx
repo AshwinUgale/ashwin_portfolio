@@ -32,10 +32,19 @@ const skills = [
   },
 ];
 
-const Skills = () => {
+const Skills = ({ activeSection }: { activeSection?: string }) => {
   return (
     <section id="skills" className="py-10 md:py-24">
       <div className="max-w-4xl mx-auto px-4">
+        <h2
+          className={`text-3xl font-bold mb-6 transition-all duration-700
+            ${activeSection === 'skills'
+              ? 'opacity-100 text-blue-400 drop-shadow-lg'
+              : 'opacity-40 text-slate-400'}
+          `}
+        >
+          Skills
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {skills.map((skill, idx) => (
             <div key={skill.category}>

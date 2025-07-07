@@ -1,12 +1,22 @@
 
 import { Cloud, Database, Server, GraduationCap } from 'lucide-react';
+import React from 'react';
 
-const About = () => {
+const About = ({ activeSection }: { activeSection?: string }) => {
   return (
     <section id="about" className="py-10 md:py-24">
       <div className="max-w-4xl mx-auto px-4">
         <div className="space-y-10">
           <div>
+            <h2
+              className={`text-3xl font-bold mb-6 transition-all duration-700
+                ${activeSection === 'about'
+                  ? 'opacity-100 text-blue-400 drop-shadow-lg'
+                  : 'opacity-40 text-slate-400'}
+              `}
+            >
+              About
+            </h2>
             <p className="text-gray-300 leading-relaxed mb-4">
               I'm a Software Engineer with a strong background in full-stack development, cloud infrastructure, and DevOps. I specialize in building scalable systems across the stack—developing frontend interfaces with React, backend services with Java, Spring Boot, and Node.js. I’ve deployed applications on AWS and GCP using Docker, Kubernetes, and CI/CD pipelines, with a focus on clean deployments, secure APIs, and workflow automation.
             </p>

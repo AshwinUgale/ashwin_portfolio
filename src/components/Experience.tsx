@@ -39,25 +39,40 @@ const experiences = [
   }
 ];
 
-const Experience = () => {
+const Experience = ({ activeSection }: { activeSection?: string }) => {
   return (
     <section id="experience" className="py-10 md:py-24">
-      <div className="max-w-4xl mx-auto px-4 flex flex-col gap-12">
-        {experiences.map((exp, idx) => (
-          <div key={exp.company} className="flex flex-col gap-2">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-0">
-              <span className="text-xl md:text-2xl font-bold text-white">{exp.company}</span>
-              <span className="text-sm text-slate-400 md:text-right">{exp.dates}</span>
-            </div>
-            <span className="text-base md:text-lg font-semibold text-blue-300">{exp.role}</span>
-            <span className="text-sm text-slate-400 mb-2">{exp.location}</span>
-            <ul className="list-disc list-inside text-gray-300 pl-2 space-y-1">
-              {exp.bullets.map((b, i) => (
-                <li key={i}>{b}</li>
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="space-y-10">
+          <div>
+            <h2
+              className={`text-3xl font-bold mb-6 transition-all duration-700
+                ${activeSection === 'experience'
+                  ? 'opacity-100 text-blue-400 drop-shadow-lg'
+                  : 'opacity-40 text-slate-400'}
+              `}
+            >
+              Experience
+            </h2>
+            <div className="max-w-4xl mx-auto px-4 flex flex-col gap-12">
+              {experiences.map((exp, idx) => (
+                <div key={exp.company} className="flex flex-col gap-2">
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-0">
+                    <span className="text-xl md:text-2xl font-bold text-white">{exp.company}</span>
+                    <span className="text-sm text-slate-400 md:text-right">{exp.dates}</span>
+                  </div>
+                  <span className="text-base md:text-lg font-semibold text-blue-300">{exp.role}</span>
+                  <span className="text-sm text-slate-400 mb-2">{exp.location}</span>
+                  <ul className="list-disc list-inside text-gray-300 pl-2 space-y-1">
+                    {exp.bullets.map((b, i) => (
+                      <li key={i}>{b}</li>
+                    ))}
+                  </ul>
+                </div>
               ))}
-            </ul>
+            </div>
           </div>
-        ))}
+        </div>
       </div>
     </section>
   );
