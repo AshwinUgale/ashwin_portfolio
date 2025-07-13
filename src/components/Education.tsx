@@ -6,7 +6,7 @@ const education = [
     school: 'Indiana University',
     gpa: 'GPA: 3.61/4',
     years: '2023 – 2025',
-    logo: '/image.png',
+    logo: '/Ashwin_portfolio/image.png',
     note: 'Developed the Venue Booking project as a major coursework assignment for the Software Engineering course, focusing on real-world application design, implementation, and deployment.'
   },
   {
@@ -14,7 +14,7 @@ const education = [
     school: 'K. J. Somaiya Institute of Technology',
     gpa: 'GPA: 8.99/10',
     years: '2019 – 2023',
-    logo: '/image2.png',
+    logo: '/Ashwin_portfolio/image2.png',
     note: 'Developed the Hospital Management project in collaboration with a local hospital and the university, transitioning the hospital from traditional paper-based methods to a digital system.'
   }
 ];
