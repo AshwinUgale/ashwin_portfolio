@@ -3,6 +3,17 @@ import React from 'react';
 
 const experiences = [
   {
+    company: 'Live Risk Labs',
+    role: 'DevOps Engineer',
+    location: 'NY, USA',
+    dates: 'June 2025 – Present',
+    bullets: [
+      'Provisioned and managed GCP infrastructure using Terraform, including VPCs, GKE clusters, IAM roles, service accounts, and secure networking.',
+      'Developed hardened golden images using Ansible and CIS benchmarks, integrating them into automated provisioning pipelines for consistent and compliant deployments.',
+      'Streamlined GitOps deployment by integrating ArgoCD with GitHub Actions and Terraform workflows, enabling secure, policy-scanned (Checkov) and auto-synced infrastructure rollouts.'
+    ]
+  },
+  {
     company: 'Hyphenova',
     role: 'Full Stack Developer Intern',
     location: 'California, USA',
