@@ -1,92 +1,113 @@
-
 import React from 'react';
+import Band from './Band';
+import Reveal from './Reveal';
 
-const experiences = [
+const featured = {
+  company: 'Enidus USA',
+  role: 'Software Engineer — AI / LLM Platform',
+  location: 'Remote, NY (US)',
+  dates: 'AUG 2025 — NOW',
+  metrics: [
+    { v: '50+', l: 'tools' },
+    { v: '442', l: 'eval set' },
+    { v: '89%', l: 'intent@1' },
+    { v: '90.3%', l: 'tool-pick' },
+    { v: '1→8', l: 'workers' },
+  ],
+  stack: ['FastAPI', 'OpenAI', 'Qdrant', 'SQL Server', 'TypeScript', 'Azure'],
+  bullets: [
+    'Multi-tenant LLM tool-calling backend with 50+ DB-registered tools, server-side JWT tenant isolation, and role-gated SQL with PII masking at the output schema.',
+    '9 ReAct workflows (suspend/resume/activate, rate-plan, bulk, eSIM & SIM ordering, troubleshoot) collapsing 10–12 portal clicks into one command, each human-in-the-loop gated.',
+    'Hybrid retrieval — lexical fast-paths for phone/BAN/ICCID + Qdrant semantic over text-embedding-3-small (~70% LRU cache) — gated by a 442-query eval at 89% intent top-1 / 90.3% tool-pick.',
+    'Migrated troubleshoot state from in-memory dicts to a SQL-persisted state machine (typed transitions, TTL) — 1→8 workers, sessions survive deploys.',
+    'TypeScript OAuth 2.0 + RS256 Proof-of-Possession layer for T-Mobile’s PIL carrier API (~75% coverage) with a legacy-to-PIL compatibility shim.',
+  ],
+};
+
+const timeline = [
   {
-    company: 'Live Risk Labs',
-    role: 'DevOps Engineer',
-    location: 'NY, USA',
-    dates: 'June 2025 – Present',
+    company: 'Live Risk Labs', role: 'Software Engineer', dates: 'JUN — AUG 2025',
     bullets: [
-      'Provisioned and managed GCP infrastructure using Terraform, including VPCs, GKE clusters, IAM roles, service accounts, and secure networking.',
-      'Developed hardened golden images using Ansible and CIS benchmarks, integrating them into automated provisioning pipelines for consistent and compliant deployments.',
-      'Streamlined GitOps deployment by integrating ArgoCD with GitHub Actions and Terraform workflows, enabling secure, policy-scanned (Checkov) and auto-synced infrastructure rollouts.'
-    ]
+      'Terraform modules for GCP (VPCs, GKE, IAM); CIS-hardened Ansible base images wired into CI.',
+      'GitOps deploys with ArgoCD + Checkov policy-as-code scanning on Terraform changes.',
+    ],
   },
   {
-    company: 'Hyphenova',
-    role: 'Full Stack Developer Intern',
-    location: 'California, USA',
-    dates: 'June 2024 – December 2024',
+    company: 'Hyphenova', role: 'Software Engineer Intern', dates: 'JUN — DEC 2024',
     bullets: [
-      'Built reusable and responsive React + TypeScript components with Redux, lazy loading, and code-splitting to improve frontend modularity and load performance.',
-      'Developed REST APIs with Node.js, Express, JWT, MongoDB, and leveraged Redis for caching, session storage, and API rate limiting, reducing DB load by 40%.',
-      'Set up GitHub Actions pipelines with Docker for testing, linting, and builds; enforced standards via Jest, ESLint, Prettier with 85%+ coverage.',
-      'Deployed versioned containers to GKE using CI/CD workflows, enabling fully automated, rollback-safe releases.',
-      'Led Agile development cycles and coordinated across frontend, backend, and QA to ensure on-time delivery and seamless integration of new features.'
-    ]
+      'Reusable React + TypeScript components (Redux, lazy loading, code splitting).',
+      'Redis caching/rate-limiting on Node + MongoDB — cut DB load 40%; GitHub Actions + Docker CI at 85%+ coverage.',
+    ],
   },
-  {
-    company: 'Feuchr School of Excellence',
-    role: 'Data Science Intern',
-    location: 'Mumbai, India',
-    dates: 'May 2022 – July 2022',
-    bullets: [
-      'Built an insurance pricing model using structured patient data, applying Gradient Boosting to predict risk-adjusted premiums with 87% accuracy.',
-      'Improved model generalization via feature selection and cross-validation, reducing MAE by 25% compared to a baseline Linear Regression model.',
-      'Delivered insights that improved quote personalization, driving a 20% increase in quote requests and 15% rise in user retention.'
-    ]
-  },
-  {
-    company: 'Image Online',
-    role: 'Machine Learning Intern',
-    location: 'Mumbai, India',
-    dates: 'December 2021 – January 2022',
-    bullets: [
-      'Analyzed multi-channel ad performance data (TV, newspaper, radio) to model revenue impact using Random Forest Regression.',
-      'Performed EDA, correlation analysis, and feature scaling to improve model input quality, leading to a 20% improvement in prediction accuracy.',
-      'Uncovered actionable insights that informed media budget allocation, contributing to an estimated 15% increase in ROI.'
-    ]
-  }
 ];
 
-const Experience = ({ activeSection }: { activeSection?: string }) => {
-  return (
-    <section id="experience" className="py-10 md:py-24">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="space-y-10">
+const Experience = () => (
+  <Band id="experience" no="02" kicker="experience" title="Where I work.">
+    <Reveal>
+      <div className="surface ticks p-6 md:p-8">
+        <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h2
-              className={`text-3xl font-bold mb-6 transition-all duration-700
-                ${activeSection === 'experience'
-                  ? 'opacity-100 text-blue-400 drop-shadow-lg'
-                  : 'opacity-40 text-slate-400'}
-              `}
-            >
-              Experience
-            </h2>
-            <div className="max-w-4xl mx-auto px-4 flex flex-col gap-12">
-              {experiences.map((exp, idx) => (
-                <div key={exp.company} className="flex flex-col gap-2">
-                  <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-1 md:gap-0">
-                    <span className="text-xl md:text-2xl font-bold text-white">{exp.company}</span>
-                    <span className="text-sm text-slate-400 md:text-right">{exp.dates}</span>
-                  </div>
-                  <span className="text-base md:text-lg font-semibold text-blue-300">{exp.role}</span>
-                  <span className="text-sm text-slate-400 mb-2">{exp.location}</span>
-                  <ul className="list-disc list-inside text-gray-300 pl-2 space-y-1">
-                    {exp.bullets.map((b, i) => (
-                      <li key={i}>{b}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
+            <div className="flex items-center gap-3">
+              <h3 className="font-display text-2xl font-bold text-white">{featured.company}</h3>
+              <span className="tag-accent">● current</span>
             </div>
+            <div className="mt-1 font-mono text-sm text-accent" style={{ color: 'hsl(var(--accent))' }}>{featured.role}</div>
+            <div className="font-mono text-xs text-white/40">{featured.location}</div>
           </div>
+          <span className="font-mono text-xs text-white/40">{featured.dates}</span>
+        </div>
+
+        <div className="my-6 grid grid-cols-2 gap-px overflow-hidden border border-white/10 sm:grid-cols-5" style={{ background: 'rgba(255,255,255,0.06)' }}>
+          {featured.metrics.map((m) => (
+            <div key={m.l} className="bg-[#0c0d10] px-3 py-3 text-center">
+              <div className="metric-big text-xl">{m.v}</div>
+              <div className="mt-0.5 font-mono text-[10px] uppercase tracking-wide text-white/40">{m.l}</div>
+            </div>
+          ))}
+        </div>
+
+        <ul className="space-y-2.5">
+          {featured.bullets.map((b, i) => (
+            <li key={i} className="flex gap-3 text-sm leading-relaxed text-white/70">
+              <span className="mt-1.5 font-mono text-xs text-accent" style={{ color: 'hsl(var(--accent))' }}>{String(i + 1).padStart(2, '0')}</span>
+              {b}
+            </li>
+          ))}
+        </ul>
+
+        <div className="mt-5 flex flex-wrap gap-1.5">
+          {featured.stack.map((s) => <span key={s} className="tag">{s}</span>)}
         </div>
       </div>
-    </section>
-  );
-};
+    </Reveal>
+
+    <div className="mt-6 grid gap-4 md:grid-cols-2">
+      {timeline.map((exp, i) => (
+        <Reveal key={exp.company} delay={i * 100}>
+          <div className="surface h-full p-5">
+            <div className="flex items-center justify-between">
+              <h3 className="font-display text-lg font-bold text-white">{exp.company}</h3>
+              <span className="font-mono text-[11px] text-white/40">{exp.dates}</span>
+            </div>
+            <div className="mb-3 font-mono text-xs text-accent" style={{ color: 'hsl(var(--accent))' }}>{exp.role}</div>
+            <ul className="space-y-1.5">
+              {exp.bullets.map((b, j) => (
+                <li key={j} className="flex gap-2 text-[13px] leading-relaxed text-white/65">
+                  <span className="text-white/30">→</span>{b}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+
+    <Reveal>
+      <div className="mt-5 font-mono text-xs text-white/35">
+        <span className="text-white/50">earlier</span> · feuchr school of excellence (data science, 2022) · image online (ml, 2021–22)
+      </div>
+    </Reveal>
+  </Band>
+);
 
 export default Experience;

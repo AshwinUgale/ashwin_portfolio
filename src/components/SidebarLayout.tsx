@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Github, Linkedin, Mail, Menu, X } from 'lucide-react';
+import { Github, Linkedin, Mail, Menu, X, FileText, Sparkles } from 'lucide-react';
 
 const navLinks = [
   { name: 'About', href: '#about', id: 'about' },
-  { name: 'Projects', href: '#projects', id: 'projects' },
   { name: 'Experience', href: '#experience', id: 'experience' },
-  { name: 'Education', href: '#education', id: 'education' },
+  { name: 'Projects', href: '#projects', id: 'projects' },
+  { name: 'Other Work', href: '#other-projects', id: 'other-projects' },
   { name: 'Skills', href: '#skills', id: 'skills' },
+  { name: 'Education', href: '#education', id: 'education' },
+  { name: 'Certifications', href: '#certifications', id: 'certifications' },
 ];
 
 const socialLinks = [
@@ -15,22 +17,110 @@ const socialLinks = [
   { icon: Mail, href: 'mailto:ugaleashwin@gmail.com', label: 'Email' },
 ];
 
+const RESUME_URL = '/Ashwin_Ugale_resume.pdf';
+
+const openChat = () => window.dispatchEvent(new CustomEvent('open-portfolio-chat'));
+
+const Identity = ({ compact = false }: { compact?: boolean }) => (
+  <div className="w-full">
+    <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-teal-300/25 bg-teal-300/[0.06] px-3 py-1">
+      <span className="h-1.5 w-1.5 rounded-full bg-teal-400 animate-pulse-dot" />
+      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-teal-200">
+        Open to opportunities
+      </span>
+    </div>
+    <h1 className={`font-extrabold tracking-tight leading-tight ${compact ? 'text-2xl' : 'text-3xl sm:text-[2.6rem]'}`}>
+      Ashwin Ugale
+    </h1>
+    <h2 className={`font-semibold gradient-text ${compact ? 'text-base mt-1' : 'text-lg sm:text-xl mt-1.5'}`}>
+      AI / LLM Engineer
+    </h2>
+    <p className={`text-slate-400 leading-relaxed ${compact ? 'text-sm mt-2' : 'text-[15px] mt-3 max-w-xs'}`}>
+      I build production LLM agent platforms, eval-driven RAG, and the full-stack
+      backends behind them.
+    </p>
+    <div className={`flex flex-wrap gap-2 ${compact ? 'mt-3' : 'mt-5'}`}>
+      <a
+        href={RESUME_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-flex items-center gap-2 rounded-lg border border-white/10 bg-white/[0.04] px-3.5 py-2 text-sm font-medium text-slate-200 transition-colors hover:border-teal-300/30 hover:text-white"
+      >
+        <FileText size={15} /> Resume
+      </a>
+      <button
+        onClick={openChat}
+        className="inline-flex items-center gap-2 rounded-lg border border-teal-300/30 bg-gradient-to-r from-teal-400/15 to-indigo-400/15 px-3.5 py-2 text-sm font-semibold text-teal-100 transition-all hover:from-teal-400/25 hover:to-indigo-400/25"
+      >
+        <Sparkles size={15} /> Ask my portfolio
+      </button>
+    </div>
+  </div>
+);
+
+const NavList = ({
+  activeSection,
+  onNavClick,
+  mobile = false,
+}: {
+  activeSection: string;
+  onNavClick: (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => void;
+  mobile?: boolean;
+}) => (
+  <nav className="flex w-full flex-col items-start gap-0.5">
+    {navLinks.map((link) => {
+      const active = activeSection === link.id;
+      return (
+        <a
+          key={link.name}
+          href={link.href}
+          onClick={(e) => onNavClick(e, link.href, link.id)}
+          className={`group flex w-full items-center gap-3 py-2 font-mono text-xs uppercase tracking-[0.15em] transition-all
+            ${active ? 'text-white' : 'text-slate-500 hover:text-slate-300'}`}
+        >
+          <span
+            className={`h-px transition-all duration-300 ${
+              active ? 'w-8 bg-teal-300' : 'w-4 bg-slate-600 group-hover:w-6 group-hover:bg-slate-400'
+            }`}
+          />
+          {link.name}
+        </a>
+      );
+    })}
+  </nav>
+);
+
+const Socials = () => (
+  <div className="flex w-full items-center gap-1">
+    {socialLinks.map((social) => (
+      <a
+        key={social.label}
+        href={social.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label={social.label}
+        className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-white/5 hover:text-teal-300"
+      >
+        <social.icon size={20} />
+      </a>
+    ))}
+  </div>
+);
+
 const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
   const [activeSection, setActiveSection] = useState('about');
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [cursor, setCursor] = useState<{ x: number; y: number } | null>(null);
 
   useEffect(() => {
-    const sectionIds = navLinks.map(link => link.id);
+    const sectionIds = navLinks.map((link) => link.id);
     const handleScroll = () => {
       let current = sectionIds[0];
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 300) {
-            current = id;
-          }
+          if (rect.top <= 320) current = id;
         }
       }
       setActiveSection(current);
@@ -40,11 +130,8 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // Mouse move handler for torch effect
   useEffect(() => {
-    const handleMove = (e: MouseEvent) => {
-      setCursor({ x: e.clientX, y: e.clientY });
-    };
+    const handleMove = (e: MouseEvent) => setCursor({ x: e.clientX, y: e.clientY });
     const handleLeave = () => setCursor(null);
     if (window.innerWidth >= 768) {
       window.addEventListener('mousemove', handleMove);
@@ -56,260 +143,89 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
     };
   }, []);
 
-  // Smooth scroll on click
-  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, id: string) => {
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, _href: string, id: string) => {
     e.preventDefault();
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-    setDrawerOpen(false); // close drawer on mobile
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setDrawerOpen(false);
   };
 
-  // Resume path (public folder is root for static files)
-  const resumePath = '/Ashwin_Ugale_resume.pdf';
-
-  // Get current section name for mobile topbar
-  const currentSectionName = navLinks.find(link => link.id === activeSection)?.name || '';
-
-  // Sidebar content as a component for reuse
-  const SidebarContent = (
-    <div className="flex flex-col gap-y-6 w-full">
-      <div className="w-full">
-        <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight mb-2 leading-tight">Ashwin Ugale</h1>
-        <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
-        <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
-        <a
-          href="/Ashwin_portfolio/Ashwin_Ugale_resume.pdf"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
-          style={{ letterSpacing: '0.04em' }}
-        >
-          View Resume
-        </a>
-      </div>
-      <div className="flex-1 flex flex-col justify-center w-full">
-        <nav className="space-y-2 w-full flex flex-col items-start">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              onClick={e => handleNavClick(e, link.href, link.id)}
-              className={`flex items-center gap-3 py-2 text-base sm:text-lg font-semibold transition-colors pl-0 w-full
-                ${activeSection === link.id
-                  ? 'text-white font-bold translate-x-2 transition-transform duration-200'
-                  : 'text-slate-400 font-medium'}
-              `}
-              style={{ letterSpacing: '0.05em' }}
-            >
-              <span className={activeSection === link.id ? 'text-white' : 'text-slate-400'}>
-                {link.name.toUpperCase()}
-              </span>
-            </a>
-          ))}
-        </nav>
-      </div>
-      <div className="flex gap-x-6 items-center w-full mt-8">
-        {socialLinks.map((social) => (
-          <a
-            key={social.label}
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={social.label}
-            className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-          >
-            <social.icon size={22} />
-          </a>
-        ))}
-      </div>
-    </div>
-  );
-
-  // Prevent background scroll when drawer is open
   useEffect(() => {
-    if (drawerOpen) {
-      document.body.classList.add('overflow-hidden');
-    } else {
-      document.body.classList.remove('overflow-hidden');
-    }
+    document.body.classList.toggle('overflow-hidden', drawerOpen);
     return () => document.body.classList.remove('overflow-hidden');
   }, [drawerOpen]);
 
+  const currentSectionName = navLinks.find((l) => l.id === activeSection)?.name || '';
+
   return (
-    <div className="min-h-screen flex bg-transparent text-white relative">
-      {/* Minimal, professional background with soft torch effect */}
-      <div
-        className="fixed inset-0 z-0 pointer-events-none"
-        aria-hidden="true"
-        style={{
-          background: '#0a1626',
-        }}
-      >
+    <div className="relative flex min-h-screen text-white">
+      {/* Background: deep navy gradient + grid + cursor glow */}
+      <div className="pointer-events-none fixed inset-0 z-0" aria-hidden="true">
+        <div className="absolute inset-0 bg-[radial-gradient(120%_120%_at_15%_0%,#0e1730_0%,#070b14_55%)]" />
+        <div className="absolute inset-0 opacity-[0.35] bg-[linear-gradient(rgba(148,163,184,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.05)_1px,transparent_1px)] bg-[size:46px_46px]" />
+        <div className="absolute -top-24 left-1/3 h-96 w-96 rounded-full bg-teal-500/10 blur-[120px]" />
+        <div className="absolute top-1/3 -right-24 h-96 w-96 rounded-full bg-indigo-500/10 blur-[120px]" />
         {cursor && (
           <div
             style={{
               position: 'fixed',
-              left: 0,
-              top: 0,
-              width: '100vw',
-              height: '100vh',
-              pointerEvents: 'none',
-              zIndex: 1,
-              background: `radial-gradient(350px at ${cursor.x}px ${cursor.y}px, rgba(80,180,255,0.10) 0%, rgba(80,180,255,0.04) 50%, transparent 90%)`,
+              inset: 0,
+              background: `radial-gradient(420px at ${cursor.x}px ${cursor.y}px, rgba(94,234,212,0.07) 0%, rgba(129,140,248,0.05) 45%, transparent 80%)`,
               transition: 'background 0.2s',
             }}
           />
         )}
       </div>
-      {/* All content above background */}
-      <div className="relative z-10 flex-1 w-full">
-        {/* Mobile Topbar: always fixed, above everything, with shadow and blur */}
-        <div className="md:hidden fixed top-0 left-0 right-0 z-[60] bg-[#0a1626]/95 shadow-lg backdrop-blur border-b border-white/10 flex items-center justify-between px-6 py-4">
-          <span className="text-xl font-extrabold tracking-tight">
+
+      <div className="relative z-10 w-full flex-1">
+        {/* Mobile topbar */}
+        <div className="fixed left-0 right-0 top-0 z-[60] flex items-center justify-between border-b border-white/10 bg-[#070b14]/95 px-5 py-4 backdrop-blur md:hidden">
+          <span className="text-lg font-extrabold tracking-tight">
             Ashwin Ugale
-            <span className="mx-2 text-blue-400 font-semibold">|</span>
-            <span className="text-base font-semibold text-slate-200">{currentSectionName}</span>
+            <span className="mx-2 font-mono text-xs font-medium text-teal-300">/ {currentSectionName}</span>
           </span>
-          <button onClick={() => setDrawerOpen((open) => !open)} aria-label="Toggle menu">
-            <Menu size={32} />
+          <button onClick={() => setDrawerOpen((o) => !o)} aria-label="Toggle menu">
+            <Menu size={28} />
           </button>
         </div>
-        {/* Mobile Drawer: overlays content, not topbar */}
+
+        {/* Mobile drawer */}
         <div
           className={`fixed inset-0 z-50 transition-all duration-300 md:hidden ${drawerOpen ? '' : 'pointer-events-none'}`}
           aria-hidden={!drawerOpen}
         >
-          {/* Overlay */}
           <div
-            className={`absolute inset-0 bg-black/60 transition-opacity duration-300 ${drawerOpen ? 'opacity-100' : 'opacity-0'}`}
+            className={`absolute inset-0 bg-black/70 transition-opacity duration-300 ${drawerOpen ? 'opacity-100' : 'opacity-0'}`}
             onClick={() => setDrawerOpen(false)}
-          ></div>
-          {/* Drawer */}
+          />
           <aside
-            className={`absolute top-0 left-0 h-full w-[340px] max-w-[90vw] bg-[#0a1626] shadow-2xl flex flex-col p-4 pt-24 md:p-8 md:pt-10 transition-transform duration-300 rounded-r-2xl ${drawerOpen ? 'translate-x-0' : '-translate-x-full'}`}
+            className={`absolute left-0 top-0 flex h-full w-[340px] max-w-[90vw] flex-col gap-6 rounded-r-2xl border-r border-white/10 bg-[#0a1020] p-6 pt-20 shadow-2xl transition-transform duration-300 ${
+              drawerOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}
           >
-            <button className="absolute top-4 right-4" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
-              <X size={28} />
+            <button className="absolute right-4 top-4" onClick={() => setDrawerOpen(false)} aria-label="Close menu">
+              <X size={26} />
             </button>
-            {/* Mobile Sidebar Content (customized for mobile) */}
-            <div className="flex flex-col gap-y-4 w-full">
-              <div className="w-full">
-                <h1 className="text-2xl font-extrabold tracking-tight mb-1 leading-tight">Ashwin Ugale</h1>
-                <h2 className="text-base font-semibold text-blue-200 mb-1">Software Engineer</h2>
-                <p className="text-slate-400 text-sm mb-4">Building scalable software and cloud infrastructure that powers real-world systems.</p>
-                <a
-                  href="/Ashwin_portfolio/Ashwin_Ugale_resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block w-full text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-2 text-sm border border-blue-500/20"
-                  style={{ letterSpacing: '0.04em' }}
-                >
-                  View Resume
-                </a>
-              </div>
-              <div className="flex-1 flex flex-col justify-center w-full">
-                <nav className="space-y-1 w-full flex flex-col items-start">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={e => handleNavClick(e, link.href, link.id)}
-                      className={`flex items-center gap-2 py-2 text-sm font-semibold transition-colors pl-0 w-full rounded-md
-                        ${activeSection === link.id
-                          ? 'text-white font-bold bg-blue-500/10 border-l-4 border-blue-400 pl-2'
-                          : 'text-slate-400 font-medium pl-4'}
-                      `}
-                      style={{ letterSpacing: '0.05em' }}
-                    >
-                      <span className={activeSection === link.id ? 'text-white' : 'text-slate-400'}>
-                        {link.name.toUpperCase()}
-                      </span>
-                    </a>
-                  ))}
-                </nav>
-              </div>
-              <hr className="my-4 border-slate-700/40" />
-              <div className="flex gap-x-4 items-center w-full mt-2">
-                {socialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                  >
-                    <social.icon size={18} />
-                  </a>
-                ))}
-              </div>
-            </div>
+            <Identity compact />
+            <NavList activeSection={activeSection} onNavClick={handleNavClick} mobile />
+            <hr className="border-white/10" />
+            <Socials />
           </aside>
         </div>
-        {/* Desktop Sidebar */}
-        <aside className="hidden md:flex flex-col justify-between items-start w-[520px] px-20 py-16 fixed inset-y-0 left-0 z-30 h-screen text-left bg-transparent">
-          <div className="flex flex-col justify-between h-full w-full">
-            <div>
-              <div className="w-full">
-                <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight">Ashwin Ugale</h1>
-                <h2 className="text-lg sm:text-xl font-semibold text-blue-200 mb-2">Software Engineer</h2>
-                <p className="text-slate-400 text-base mb-6">Building scalable software and cloud infrastructure that powers real-world systems.</p>
-                <a
-                  href="/Ashwin_portfolio/Ashwin_Ugale_resume.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-block w-auto text-left bg-blue-500/10 hover:bg-blue-500/20 text-blue-400 font-medium py-2 px-4 rounded-md transition-colors duration-200 shadow-sm mb-4 text-sm border border-blue-500/20"
-                  style={{ letterSpacing: '0.04em' }}
-                >
-                  View Resume
-                </a>
-              </div>
-              <div className="flex-1 flex flex-col justify-center w-full">
-                <nav className="space-y-2 w-full flex flex-col items-start">
-                  {navLinks.map((link) => (
-                    <a
-                      key={link.name}
-                      href={link.href}
-                      onClick={e => handleNavClick(e, link.href, link.id)}
-                      className={`flex items-center gap-3 py-2 text-base sm:text-lg font-semibold transition-colors pl-0 w-full
-                        ${activeSection === link.id
-                          ? 'text-white font-bold translate-x-2 transition-transform duration-200'
-                          : 'text-slate-400 font-medium'}
-                      `}
-                      style={{ letterSpacing: '0.05em' }}
-                    >
-                      <span className={activeSection === link.id ? 'text-white' : 'text-slate-400'}>
-                        {link.name.toUpperCase()}
-                      </span>
-                    </a>
-                  ))}
-                </nav>
-              </div>
-            </div>
-            <div className="flex gap-x-6 items-center w-full mt-8">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={social.label}
-                  className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors"
-                >
-                  <social.icon size={22} />
-                </a>
-              ))}
-            </div>
+
+        {/* Desktop sidebar */}
+        <aside className="fixed inset-y-0 left-0 z-30 hidden h-screen w-[460px] flex-col justify-between px-16 py-16 md:flex">
+          <Identity />
+          <div className="flex flex-col gap-10">
+            <NavList activeSection={activeSection} onNavClick={handleNavClick} />
           </div>
+          <Socials />
         </aside>
-        
-        {/* Main Content: pt-16 on mobile, md:pt-0 */}
-        <main className="flex-1 min-h-screen px-4 md:px-16 py-8 md:py-20 md:ml-[540px] bg-transparent pt-16 md:pt-0 overflow-y-auto scroll-container">
-          {React.Children.map(children, child =>
+
+        {/* Main content */}
+        <main className="scroll-container min-h-screen flex-1 overflow-y-auto px-4 pt-20 md:ml-[480px] md:px-16 md:pt-20">
+          {React.Children.map(children, (child) =>
             React.isValidElement(child)
-              ? React.cloneElement(child, { activeSection })
+              ? React.cloneElement(child as React.ReactElement<{ activeSection?: string }>, { activeSection })
               : child
           )}
         </main>
@@ -318,4 +234,4 @@ const SidebarLayout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default SidebarLayout; 
+export default SidebarLayout;

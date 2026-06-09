@@ -1,139 +1,98 @@
-
-import { Github, Terminal, Cloud, Database, Server, Container } from 'lucide-react';
 import React from 'react';
+import { Github, ExternalLink, Package } from 'lucide-react';
+import Band from './Band';
+import Reveal from './Reveal';
 
-const Projects = ({ activeSection }: { activeSection?: string }) => {
-  const projects = [
-    {
-      id: 1,
-      title: 'Cloud Native Booking Platform',
-      description: 'A cloud-native booking platform built with React, Node.js, and Spring Boot. Deployed on Google Kubernetes Engine (GKE) using Docker and GitHub Actions for a complete CI/CD pipeline. Built to deepen my understanding of cloud infrastructure, container orchestration, and automated deployment workflows.',
-      category: 'Cloud-Native Application',
-      tags: ['React', 'Node.js', 'Spring Boot', 'Docker', 'GKE', 'GitHub Actions'],
-      liveUrl: 'http://cloudtix.xyz/',
-      githubUrl: 'https://github.com/AshwinUgale/CloudNative-BookingPlatform',
-      icon: Cloud
-    },
-    {
-      id: 2,
-      title: 'Hospital Database Management System',
-      description: 'A full-stack web-based hospital management system built using PHP, JavaScript, and MySQL. The system centralizes core hospital operations such as patient registration, staff scheduling, inventory tracking, and billing into a unified, modular interface.',
-      category: 'Database & Workflow Automation',
-      tags: ['PHP', 'JavaScript', 'HTML', 'CSS', 'MySQL'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/AshwinUgale/HospitalManagementSystem',
-      icon: Database
-    },
-    {
-      id: 3,
-      title: 'Art Gallery Venue Booking System',
-      description: 'A full-stack web application built using the MERN stack, designed to streamline the reservation and management of gallery spaces for exhibitions and events. The platform includes real-time communication features and an admin dashboard for managing booking requests and user interactions.',
-      category: 'Full-Stack Web Application',
-      tags: ['MongoDB', 'Express', 'React', 'Node.js', 'Socket.io'],
-      liveUrl: '',
-      githubUrl: 'https://github.com/AshwinUgale/CSCI-P565',
-      icon: Terminal
-    },
-    {
-      id: 4,
-      title: 'Cloud Deployments Monitoring',
-      description: 'A real-time cloud monitoring dashboard for tracking HTTP status, latency, SSL, and DNS metrics of cloud deployments. Runs on AWS EC2 and visualizes data using Grafana and Prometheus, providing instant insights into uptime, response times, and infrastructure health.',
-      category: 'Cloud Monitoring & Observability',
-      tags: ['AWS', 'EC2', 'Grafana', 'Prometheus', 'Monitoring'],
-      liveUrl: 'http://3.22.70.98:3000/d/xtkCtBkiz/<slug>?orgId=1&kiosk',
-      githubUrl: '',
-      icon: Server
-    },
-    {
-      id: 5,
-      title: 'AWS Cost Optimization Suite',
-      description: 'A dashboard and workflow for optimizing the use of free credits and free tier services to deploy my projects. I use this to track and manage cloud costs across multiple providers and keep my deployments efficient and affordable.',
-      category: 'Cloud Optimization',
-      tags: ['AWS Lambda', 'CloudWatch', 'Cost Explorer', 'Python'],
-      liveUrl: '',
-      githubUrl: '',
-      icon: Cloud
-    }
-  ];
+type Lnk = { label: string; href: string; kind: 'code' | 'ext' | 'pkg' };
+type P = { no: string; title: string; channel: string; tagline: string; metrics: string[]; tags: string[]; links: Lnk[] };
 
-  return (
-    <section id="projects" className="py-10 md:py-24">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="space-y-10">
-          <div>
-            <h2
-              className={`text-3xl font-bold mb-6 transition-all duration-700
-                ${activeSection === 'projects'
-                  ? 'opacity-100 text-blue-400 drop-shadow-lg'
-                  : 'opacity-40 text-slate-400'}
-              `}
-            >
-              Projects
-            </h2>
-            <div className="flex flex-col gap-8">
-              {projects.map((project) => {
-                const IconComponent = project.icon;
-                return (
-                  <div
-                    key={project.id}
-                    className="group rounded-2xl p-5 md:p-7 flex flex-col gap-3"
-                  >
-                    <div className="flex items-center gap-3 mb-1">
-                      <span className="inline-flex items-center justify-center w-11 h-11 rounded-full bg-gradient-to-br from-blue-700 via-blue-500 to-blue-300 shadow-md">
-                        <IconComponent size={26} className="text-white" />
-                      </span>
-                      <div className="flex flex-col">
-                        <h3 className="text-base md:text-lg font-semibold text-white leading-tight mb-0.5">
-                          {project.title}
-                        </h3>
-                        <span className="text-xs text-blue-300 font-medium">{project.category}</span>
-                      </div>
-                    </div>
-                    <p className="text-gray-300 text-sm md:text-base leading-relaxed mb-1">
-                      {project.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mb-2">
-                      {project.tags.map((tag, index) => (
-                        <span
-                          key={index}
-                          className="text-xs bg-transparent text-gray-300 px-2 py-1 rounded-full border border-blue-400/30"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex gap-3 mt-2">
-                      {project.githubUrl && (
-                        <a
-                          href={project.githubUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-[#1e293b] hover:bg-blue-700 text-blue-300 hover:text-white text-xs font-semibold transition-colors border border-blue-700/30 shadow-sm"
-                        >
-                          Code
-                        </a>
-                      )}
-                      {project.liveUrl && (
-                        <a
-                          href={project.liveUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-3 py-1.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-xs font-semibold transition-colors shadow-sm"
-                        >
-                          Demo
-                        </a>
-                      )}
-                    </div>
-                  </div>
-                );
-              })}
+const projects: P[] = [
+  {
+    no: '01', title: 'DocChat', channel: 'VS Code Marketplace',
+    tagline: 'Version-pinned library-docs Q&A in VS Code — answers from the exact version your lockfile pins, and refuses instead of hallucinating.',
+    metrics: ['0.943 version-correct', '1.000 OOS refusal', '48-pair eval'],
+    tags: ['TypeScript', 'FastAPI', 'Qdrant', 'ReAct'],
+    links: [
+      { kind: 'ext', label: 'marketplace', href: 'https://marketplace.visualstudio.com/items?itemName=AshwinUgale.docchat' },
+      { kind: 'code', label: 'code', href: 'https://github.com/AshwinUgale/docchat' },
+    ],
+  },
+  {
+    no: '02', title: 'Mneme', channel: 'PyPI · smolAmem',
+    tagline: 'Multi-tier long-term memory for LLM agents — working / episodic / semantic — with pluggable backends and decay-based forgetting.',
+    metrics: ['recall@5 = 1.000', '<50% token cost'],
+    tags: ['Python', 'Qdrant', 'pgvector', 'APScheduler'],
+    links: [
+      { kind: 'pkg', label: 'pypi', href: 'https://pypi.org/project/smolAmem/' },
+      { kind: 'ext', label: 'docs', href: 'https://ashwinugale.github.io/mneme/' },
+      { kind: 'code', label: 'code', href: 'https://github.com/AshwinUgale/mneme' },
+    ],
+  },
+  {
+    no: '03', title: 'ToolPicker', channel: 'PyPI · toolpicker',
+    tagline: 'Hybrid BM25 + semantic tool router with intent-classifier reranking and Reciprocal Rank Fusion, plus a token-budget packer.',
+    metrics: ['BM25 + semantic + intent', 'ToolBench / Gorilla evals'],
+    tags: ['Python', 'rank-bm25', 'scikit-learn'],
+    links: [
+      { kind: 'pkg', label: 'pypi', href: 'https://pypi.org/project/toolpicker/' },
+      { kind: 'ext', label: 'docs', href: 'https://ashwinugale.github.io/toolpicker/' },
+      { kind: 'code', label: 'code', href: 'https://github.com/AshwinUgale/toolpicker' },
+    ],
+  },
+  {
+    no: '04', title: 'docchat-server', channel: 'PyPI · MCP server',
+    tagline: 'DocChat’s retrieval engine as a Model Context Protocol server — version-pinned grounding for Claude Code, Cursor, Cline, and any MCP client.',
+    metrics: ['FastMCP + embedded Qdrant', 'MCP: search_docs / list_indexed'],
+    tags: ['Python', 'MCP', 'FastMCP', 'Qdrant'],
+    links: [
+      { kind: 'pkg', label: 'pypi', href: 'https://pypi.org/project/docchat-server/' },
+      { kind: 'code', label: 'code', href: 'https://github.com/AshwinUgale/docchat-mcp' },
+    ],
+  },
+];
+
+const linkIcon = (k: string) => (k === 'code' ? <Github size={12} /> : k === 'pkg' ? <Package size={12} /> : <ExternalLink size={12} />);
+
+const Projects = () => (
+  <Band id="projects" no="03" kicker="featured · open source" title="What I ship.">
+    <Reveal>
+      <p className="-mt-4 mb-7 max-w-2xl text-sm leading-relaxed text-white/55">
+        Four production AI projects across PyPI, the VS Code Marketplace, and the MCP ecosystem. Every
+        release gated by a labeled eval — public CHANGELOGs even document two reverted regressions.
+      </p>
+    </Reveal>
+
+    <div className="grid gap-4 md:grid-cols-2">
+      {projects.map((p, i) => (
+        <Reveal key={p.title} delay={i * 80}>
+          <article className="surface ticks flex h-full flex-col p-5">
+            <div className="flex items-baseline justify-between">
+              <span className="font-mono text-xs text-white/30">{p.no}</span>
+              <span className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'hsl(var(--accent))' }}>{p.channel}</span>
             </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+            <h3 className="mt-2 font-display text-2xl font-bold text-white">{p.title}</h3>
+            <p className="mt-2 text-[13px] leading-relaxed text-white/60">{p.tagline}</p>
+
+            <div className="mt-3 flex flex-wrap gap-1.5">
+              {p.metrics.map((m) => <span key={m} className="tag-accent">{m}</span>)}
+            </div>
+            <div className="mt-2 flex flex-wrap gap-1.5">
+              {p.tags.map((t) => <span key={t} className="tag">{t}</span>)}
+            </div>
+
+            <div className="mt-auto flex flex-wrap gap-2 pt-4">
+              {p.links.map((l) => (
+                <a key={l.label} href={l.href} target="_blank" rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 border border-white/12 px-2.5 py-1 font-mono text-[11px] text-white/70 transition-colors hover:border-accent hover:text-accent" style={{ borderRadius: '3px' }}>
+                  {linkIcon(l.kind)} {l.label}
+                </a>
+              ))}
+            </div>
+          </article>
+        </Reveal>
+      ))}
+    </div>
+  </Band>
+);
 
 export default Projects;
-

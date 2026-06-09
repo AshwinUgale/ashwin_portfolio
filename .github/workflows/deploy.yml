@@ -22,7 +22,11 @@ jobs:
         run: npm ci
 
       - name: Build project
-        run: npm run build  # or vite build
+        run: npm run build
+        env:
+          # Set this repo secret to your Lambda Function URL to make the live chat LLM-powered.
+          # If unset, the site still works with grounded local answers.
+          VITE_CHAT_API_URL: ${{ secrets.VITE_CHAT_API_URL }}
 
       - name: Sync to S3
         uses: jakejarvis/s3-sync-action@v0.5.1

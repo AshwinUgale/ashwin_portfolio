@@ -1,73 +1,34 @@
 import React from 'react';
+import Band from './Band';
+import Reveal from './Reveal';
 
 const education = [
-  {
-    degree: 'Master of Science in Computer Science',
-    school: 'Indiana University',
-    gpa: 'GPA: 3.61/4',
-    years: '2023 – 2025',
-    logo: '/Ashwin_portfolio/image.png',
-    note: 'Developed the Venue Booking project as a major coursework assignment for the Software Engineering course, focusing on real-world application design, implementation, and deployment.'
-  },
-  {
-    degree: 'Bachelor of Technology in Electronics and Telecommunication Engineering',
-    school: 'K. J. Somaiya Institute of Technology',
-    gpa: 'GPA: 8.99/10',
-    years: '2019 – 2023',
-    logo: '/Ashwin_portfolio/image2.png',
-    note: 'Developed the Hospital Management project in collaboration with a local hospital and the university, transitioning the hospital from traditional paper-based methods to a digital system.'
-  }
+  { degree: 'M.S. Computer Science', school: 'Indiana University Bloomington', gpa: '3.61 / 4', years: '2023 — 2025', logo: '/image.png' },
+  { degree: 'B.Tech Electronics & Telecom', school: 'K. J. Somaiya Institute of Technology', gpa: '8.99 / 10', years: '2019 — 2023', logo: '/image2.png' },
 ];
 
-const Education = ({ activeSection }: { activeSection?: string }) => {
-  return (
-    <section id="education" className="py-10 md:py-24">
-      <div className="max-w-4xl mx-auto px-4">
-        <div className="space-y-10">
-          <div>
-            <h2
-              className={`text-3xl font-bold mb-6 transition-all duration-700
-                ${activeSection === 'education'
-                  ? 'opacity-100 text-blue-400 drop-shadow-lg'
-                  : 'opacity-40 text-slate-400'}
-              `}
-            >
-              Education
-            </h2>
-            <div className="flex flex-col gap-8">
-              {education.map((edu, idx) => (
-                <div
-                  key={idx}
-                  className="group flex flex-col gap-3 p-0"
-                >
-                  <div className="flex items-center gap-3 mb-1">
-                    <span className="inline-flex items-center justify-center w-14 h-14 md:w-20 md:h-20 rounded-lg bg-white/10 p-2">
-                      <img
-                        src={edu.logo}
-                        alt={edu.school + ' logo'}
-                        className="object-contain w-full h-full"
-                      />
-                    </span>
-                    <div className="flex flex-col">
-                      <span className="text-base md:text-lg font-bold text-white leading-tight mb-0.5">{edu.degree}</span>
-                      <span className="text-xs text-blue-300 font-medium">{edu.school}</span>
-                      {edu.gpa && (
-                        <span className="text-xs text-blue-200 font-normal">{edu.gpa}</span>
-                      )}
-                    </div>
-                    <span className="ml-auto text-xs text-slate-400 md:text-right">{edu.years}</span>
-                  </div>
-                  {edu.note && (
-                    <div className="text-sm text-slate-300 mt-1">{edu.note}</div>
-                  )}
-                </div>
-              ))}
+const Education = () => (
+  <Band id="education" no="06" kicker="education" title="Where I studied.">
+    <div className="grid gap-4 md:grid-cols-2">
+      {education.map((e, i) => (
+        <Reveal key={e.school} delay={i * 90}>
+          <div className="surface flex h-full items-center gap-4 p-5">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center bg-white/10 p-1.5" style={{ borderRadius: '5px' }}>
+              <img src={e.logo} alt={e.school} className="h-full w-full object-contain" />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-start justify-between gap-2">
+                <span className="font-display text-[15px] font-semibold leading-snug text-white">{e.degree}</span>
+                <span className="shrink-0 font-mono text-[11px] text-white/40">{e.years}</span>
+              </div>
+              <div className="mt-0.5 text-sm" style={{ color: 'hsl(var(--accent))' }}>{e.school}</div>
+              <div className="font-mono text-[11px] text-white/40">gpa {e.gpa}</div>
             </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-};
+        </Reveal>
+      ))}
+    </div>
+  </Band>
+);
 
-export default Education; 
+export default Education;

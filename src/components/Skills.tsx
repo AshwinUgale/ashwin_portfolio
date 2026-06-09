@@ -1,67 +1,39 @@
-
 import React from 'react';
+import Band from './Band';
+import Reveal from './Reveal';
 
-const skills = [
-  {
-    category: 'Programming Languages',
-    items: ['Python', 'Java', 'C++', 'C', 'PHP', 'R'],
-  },
-  {
-    category: 'Operating Systems',
-    items: ['Linux', 'UNIX', 'BSD', 'Shell Scripting'],
-  },
-  {
-    category: 'Networking',
-    items: ['TCP/IP', 'Load Balancing', 'HTTP', 'DNS', 'CDN'],
-  },
-  {
-    category: 'Databases',
-    items: ['SQL', 'MongoDB', 'Firebase', 'RDBMS', 'Oracle', 'MySQL', 'PostgreSQL'],
-  },
-  {
-    category: 'Web Development',
-    items: ['React', 'Node.js', 'Spring Boot', 'Express', 'Bootstrap', 'HTML', 'CSS', 'JavaScript', 'MERN'],
-  },
-  {
-    category: 'Cloud & DevOps',
-    items: ['GCP', 'AWS', 'Docker', 'Kubernetes', 'GitHub Actions', 'Helm', 'Prometheus', 'Grafana', 'CI/CD'],
-  },
-  {
-    category: 'Tools & Practices',
-    items: ['Agile', 'Git', 'Postman', 'REST APIs', 'Microservice Architecture', 'Data Structures & Algorithms'],
-  },
+const groups = [
+  { k: 'ai / llm', items: ['OpenAI', 'Tool-Calling', 'ReAct', 'RAG', 'Hybrid Retrieval', 'Embeddings', 'MCP', 'LangGraph', 'Evals', 'Prompt Eng'] },
+  { k: 'backend', items: ['FastAPI', 'Node.js', 'Express', 'REST', 'WebSockets', 'OAuth2 + PoP', 'APScheduler'] },
+  { k: 'data', items: ['Qdrant', 'pgvector', 'SQL Server', 'PostgreSQL', 'Redis', 'MongoDB', 'BM25'] },
+  { k: 'frontend', items: ['React', 'TypeScript', 'Redux', 'Vite', 'Tailwind'] },
+  { k: 'cloud / ci', items: ['AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'GitHub Actions', 'OIDC'] },
+  { k: 'security', items: ['CodeQL', 'Semgrep', 'Dependabot', 'TruffleHog', 'pytest', 'vitest'] },
 ];
 
-const Skills = ({ activeSection }: { activeSection?: string }) => {
-  return (
-    <section id="skills" className="py-10 md:py-24">
-      <div className="max-w-4xl mx-auto px-4">
-        <h2
-          className={`text-3xl font-bold mb-6 transition-all duration-700
-            ${activeSection === 'skills'
-              ? 'opacity-100 text-blue-400 drop-shadow-lg'
-              : 'opacity-40 text-slate-400'}
-          `}
-        >
-          Skills
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          {skills.map((skill, idx) => (
-            <div key={skill.category}>
-              <h4 className="text-lg font-semibold text-blue-300 mb-2">{skill.category}</h4>
-              <div className="flex flex-wrap gap-2">
-                {skill.items.map((item) => (
-                  <span key={item} className="text-sm bg-white/5 text-gray-200 px-3 py-1.5 rounded">
-                    {item}
-                  </span>
-                ))}
-              </div>
+const langs = ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java', 'Go'];
+
+const Skills = () => (
+  <Band id="skills" no="05" kicker="stack" title="Tools I reach for.">
+    <div className="grid gap-px overflow-hidden border border-white/10 sm:grid-cols-2 lg:grid-cols-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+      {groups.map((g, i) => (
+        <Reveal key={g.k} delay={i * 60}>
+          <div className="h-full bg-[#0b0c0e] p-5">
+            <div className="mono-label mb-3" style={{ color: 'hsl(var(--accent))' }}>{g.k}</div>
+            <div className="flex flex-wrap gap-1.5">
+              {g.items.map((it) => <span key={it} className="tag">{it}</span>)}
             </div>
-          ))}
-        </div>
+          </div>
+        </Reveal>
+      ))}
+    </div>
+    <Reveal>
+      <div className="mt-5 flex flex-wrap items-center gap-2">
+        <span className="mono-label">languages</span>
+        {langs.map((l) => <span key={l} className="tag-accent">{l}</span>)}
       </div>
-    </section>
-  );
-};
+    </Reveal>
+  </Band>
+);
 
 export default Skills;
