@@ -25,16 +25,15 @@ export const AboutNode = () => (
     <Heading>About</Heading>
     <div className="space-y-4 text-[15px] leading-relaxed text-[hsl(var(--cream)/0.72)]">
       <p>
-        I'm an AI/LLM engineer who builds production agent systems and the backends that hold them up.
-        At <span className="text-[hsl(var(--cream))]">Enidus</span> I'm building a multi-tenant LLM
-        tool-calling platform for T-Mobile for Business — FastAPI, OpenAI, Qdrant and SQL Server on
-        Azure, with human approval before any carrier-side change.
+        I'm a software engineer working on LLM agents and the backend that supports them. At
+        <span className="text-[hsl(var(--cream))]"> Enidus</span> I'm building an agent platform for
+        T-Mobile for Business — it runs telecom operations through chat, on FastAPI, OpenAI, Qdrant and
+        SQL Server, with a person approving anything before it changes a customer's account.
       </p>
       <p>
-        I treat AI like any other production software: every release is gated by a labeled eval, and
-        regressions get measured and reverted rather than hidden. Underneath the AI work is real
-        full-stack depth — Node/TypeScript services, an OAuth 2.0 + Proof-of-Possession layer, and
-        SQL-persisted state machines.
+        My background is full-stack — Node/TypeScript services, API integrations, and SQL databases —
+        so the work goes beyond the model layer. I rely on evals to keep quality stable: changes run
+        against a labeled test set before they ship, and regressions get reverted.
       </p>
     </div>
     <div className="mt-6">
@@ -45,7 +44,7 @@ export const AboutNode = () => (
 
 /* ---------- Experience ---------- */
 const stats = [
-  ['50+', 'tools'], ['442', 'eval set'], ['89%', 'intent@1'], ['90.3%', 'tool-pick'], ['1→8', 'workers'],
+  ['50+', 'tools'], ['442', 'eval queries'], ['89%', 'intent@1'], ['90.3%', 'tool-pick'], ['1→8', 'workers'],
 ];
 const enidusBullets = [
   'Multi-tenant LLM tool-calling backend (FastAPI · OpenAI · Qdrant · SQL Server on Azure) — 50+ database-registered tools, server-side JWT tenant isolation, role-gated SQL with PII masking.',
@@ -62,7 +61,7 @@ export const ExperienceNode = () => (
     <div className="panel p-6">
       <div className="flex flex-wrap items-baseline justify-between gap-2">
         <span className="serif text-2xl text-[hsl(var(--cream))]">Enidus USA</span>
-        <span className="text-[12px] uppercase tracking-wider text-[hsl(var(--cream)/0.45)]">2025 — now</span>
+        <span className="text-[12px] uppercase tracking-wider text-[hsl(var(--cream)/0.45)]">Aug 2025 — Present</span>
       </div>
       <div className="mt-1 text-[14px] text-[hsl(var(--cream)/0.6)]">Software Engineer · AI / LLM Platform</div>
 
@@ -90,7 +89,7 @@ export const ExperienceNode = () => (
       <div className="panel p-5">
         <div className="flex items-baseline justify-between">
           <span className="serif text-xl text-[hsl(var(--cream))]">Live Risk Labs</span>
-          <span className="text-[11px] uppercase tracking-wider text-[hsl(var(--cream)/0.42)]">2025</span>
+          <span className="text-[11px] uppercase tracking-wider text-[hsl(var(--cream)/0.42)]">Jun — Aug 2025</span>
         </div>
         <div className="mb-2 text-[12.5px] text-[hsl(var(--cream)/0.55)]">Software Engineer</div>
         <p className="text-[13.5px] leading-relaxed text-[hsl(var(--cream)/0.68)]">
@@ -100,7 +99,7 @@ export const ExperienceNode = () => (
       <div className="panel p-5">
         <div className="flex items-baseline justify-between">
           <span className="serif text-xl text-[hsl(var(--cream))]">Hyphenova</span>
-          <span className="text-[11px] uppercase tracking-wider text-[hsl(var(--cream)/0.42)]">2024</span>
+          <span className="text-[11px] uppercase tracking-wider text-[hsl(var(--cream)/0.42)]">Jun — Dec 2024</span>
         </div>
         <div className="mb-2 text-[12.5px] text-[hsl(var(--cream)/0.55)]">Software Engineer Intern</div>
         <p className="text-[13.5px] leading-relaxed text-[hsl(var(--cream)/0.68)]">
@@ -179,7 +178,7 @@ export const ProjectsNode = () => (
 
 /* ---------- Also built ---------- */
 const other = [
-  ['Cloud-Native Booking Platform', 'React · Spring Boot on GKE with full CI/CD.', ['Spring Boot', 'GKE'], 'http://cloudtix.xyz/'],
+  ['Cloud-Native Booking Platform', 'React · Spring Boot on GKE with full CI/CD.', ['Spring Boot', 'GKE'], 'https://github.com/AshwinUgale/CloudNative-BookingPlatform'],
   ['Cloud Deployments Monitoring', 'HTTP/SSL/DNS monitoring on AWS EC2 with Grafana.', ['AWS', 'Grafana'], ''],
   ['Art Gallery Venue Booking', 'MERN app with real-time messaging.', ['MongoDB', 'Socket.io'], 'https://github.com/AshwinUgale/CSCI-P565'],
   ['Hospital Management System', 'Records, scheduling and billing.', ['PHP', 'MySQL'], 'https://github.com/AshwinUgale/HospitalManagementSystem'],
@@ -187,7 +186,7 @@ const other = [
 
 export const OtherNode = () => (
   <div>
-    <Heading>Also built</Heading>
+    <Heading>Other projects</Heading>
     <div className="grid gap-4 sm:grid-cols-2">
       {other.map(([t, d, tags, h]) => (
         <div key={t} className="panel p-5">

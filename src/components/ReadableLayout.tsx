@@ -12,7 +12,6 @@ const SECTIONS = [
   { id: 'about', label: 'About' },
   { id: 'experience', label: 'Experience' },
   { id: 'projects', label: 'Projects' },
-  { id: 'other', label: 'Also built' },
   { id: 'skills', label: 'Tools' },
   { id: 'education', label: 'Education' },
   { id: 'contact', label: 'Contact' },
@@ -42,8 +41,8 @@ const ReadableLayout = () => {
           </h1>
           <p className="mt-2 text-[15px] text-[hsl(var(--cream)/0.8)]">AI / LLM Engineer</p>
           <p className="mt-4 max-w-xs text-[14px] leading-relaxed text-[hsl(var(--cream)/0.55)]">
-            I build production agent systems and the backends behind them — currently at Enidus, on an
-            LLM platform for T-Mobile for Business.
+            I work on LLM agents and the backend that supports them. I'm at Enidus, building one for
+            T-Mobile for Business.
           </p>
 
           <nav className="mt-10 hidden flex-col gap-3 lg:flex">
