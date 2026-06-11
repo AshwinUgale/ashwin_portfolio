@@ -44,7 +44,7 @@ const timeline = [
 const Experience = () => (
   <Band id="experience" no="02" kicker="experience" title="Where I work.">
     <Reveal>
-      <div className="surface ticks p-6 md:p-8">
+      <div className="surface p-6 md:p-8">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
             <div className="flex items-center gap-3">

@@ -20,7 +20,7 @@ const OtherProjects = () => (
         const Icon = p.icon;
         return (
           <Reveal key={p.title} delay={i * 60}>
-            <div className="surface ticks group flex h-full flex-col p-5">
+            <div className="surface group flex h-full flex-col p-5">
               <div className="mb-3 flex items-center justify-between">
                 <span className="flex h-9 w-9 items-center justify-center border border-white/10 text-white/60 transition-colors group-hover:text-accent" style={{ borderRadius: '5px' }}>
                   <Icon size={16} />
@@ -42,7 +42,7 @@ const OtherProjects = () => (
 
       <Reveal delay={projects.length * 60}>
         <a href="https://github.com/AshwinUgale" target="_blank" rel="noopener noreferrer"
-          className="surface ticks group flex h-full min-h-[150px] flex-col items-center justify-center gap-2 p-5 text-center">
+          className="surface group flex h-full min-h-[150px] flex-col items-center justify-center gap-2 p-5 text-center">
           <ArrowUpRight size={22} className="text-white/45 transition-colors group-hover:text-accent" />
           <span className="font-display text-sm font-semibold text-white">More on GitHub</span>
           <span className="font-mono text-[11px] text-white/40">github.com/AshwinUgale</span>

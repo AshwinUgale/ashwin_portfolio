@@ -65,7 +65,7 @@ const Projects = () => (
     <div className="grid gap-4 md:grid-cols-2">
       {projects.map((p, i) => (
         <Reveal key={p.title} delay={i * 80}>
-          <article className="surface ticks flex h-full flex-col p-5">
+          <article className="surface flex h-full flex-col p-5">
             <div className="flex items-baseline justify-between">
               <span className="font-mono text-xs text-white/30">{p.no}</span>
               <span className="font-mono text-[10px] uppercase tracking-wide" style={{ color: 'hsl(var(--accent))' }}>{p.channel}</span>

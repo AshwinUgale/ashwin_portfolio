@@ -15,10 +15,10 @@ const langs = ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java', 'Go'];
 
 const Skills = () => (
   <Band id="skills" no="05" kicker="stack" title="Tools I reach for.">
-    <div className="grid gap-px overflow-hidden border border-white/10 sm:grid-cols-2 lg:grid-cols-3" style={{ background: 'rgba(255,255,255,0.06)' }}>
+    <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
       {groups.map((g, i) => (
         <Reveal key={g.k} delay={i * 60}>
-          <div className="h-full bg-[#0b0c0e] p-5">
+          <div className="surface h-full p-5">
             <div className="mono-label mb-3" style={{ color: 'hsl(var(--accent))' }}>{g.k}</div>
             <div className="flex flex-wrap gap-1.5">
               {g.items.map((it) => <span key={it} className="tag">{it}</span>)}

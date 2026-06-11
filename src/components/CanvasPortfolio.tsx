@@ -1,0 +1,197 @@
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { IntroNode, ExperienceNode, ProjectsNode, OtherNode, SkillsNode, EducationNode, ContactNode } from './nodes';
+
+const ask = () => window.dispatchEvent(new CustomEvent('open-portfolio-chat'));
+
+type NodeDef = { id: string; label: string; x: number; y: number; w: number; el: React.ReactNode };
+
+const NODES: NodeDef[] = [
+  { id: 'intro', label: 'Intro', x: 880, y: 760, w: 460, el: <IntroNode onAsk={ask} /> },
+  { id: 'experience', label: 'Experience', x: 1520, y: 470, w: 470, el: <ExperienceNode /> },
+  { id: 'projects', label: 'Work', x: 1560, y: 1180, w: 470, el: <ProjectsNode /> },
+  { id: 'other', label: 'More', x: 900, y: 1340, w: 430, el: <OtherNode /> },
+  { id: 'skills', label: 'Tools', x: 340, y: 1060, w: 400, el: <SkillsNode /> },
+  { id: 'education', label: 'Education', x: 430, y: 470, w: 420, el: <EducationNode /> },
+  { id: 'contact', label: 'Contact', x: 1040, y: 150, w: 380, el: <ContactNode onAsk={ask} /> },
+];
+
+const NAV = ['intro', 'experience', 'projects', 'other', 'skills', 'education', 'contact'];
+
+const CanvasPortfolio = () => {
+  const [tx, setTx] = useState(0);
+  const [ty, setTy] = useState(0);
+  const [scale, setScale] = useState(1);
+  const [smooth, setSmooth] = useState(true);
+  const [active, setActive] = useState('intro');
+  const [hintGone, setHintGone] = useState(false);
+
+  const planeRef = useRef<HTMLDivElement>(null);
+  const nodeRefs = useRef<Map<string, HTMLDivElement>>(new Map());
+  const drag = useRef<{ on: boolean; sx: number; sy: number; tx: number; ty: number; moved: boolean }>({
+    on: false, sx: 0, sy: 0, tx: 0, ty: 0, moved: false,
+  });
+  const [centers, setCenters] = useState<Record<string, { cx: number; cy: number }>>({});
+
+  const measure = () => {
+    const c: Record<string, { cx: number; cy: number }> = {};
+    nodeRefs.current.forEach((el, id) => {
+      c[id] = { cx: el.offsetLeft + el.offsetWidth / 2, cy: el.offsetTop + el.offsetHeight / 2 };
+    });
+    setCenters(c);
+    return c;
+  };
+
+  const centerOn = (id: string, sArg?: number) => {
+    const el = nodeRefs.current.get(id);
+    if (!el) return;
+    const fit = Math.min(1, (window.innerWidth - 48) / el.offsetWidth);
+    const s = sArg ?? fit;
+    const cx = el.offsetLeft + el.offsetWidth / 2;
+    const cy = el.offsetTop + el.offsetHeight / 2;
+    setSmooth(true);
+    setScale(s);
+    setTx(window.innerWidth / 2 - cx * s);
+    setTy(window.innerHeight / 2 - cy * s + 8);
+    setActive(id);
+    setHintGone(true);
+  };
+
+  const overview = () => {
+    let minX = Infinity, minY = Infinity, maxX = -Infinity, maxY = -Infinity;
+    nodeRefs.current.forEach((el) => {
+      minX = Math.min(minX, el.offsetLeft);
+      minY = Math.min(minY, el.offsetTop);
+      maxX = Math.max(maxX, el.offsetLeft + el.offsetWidth);
+      maxY = Math.max(maxY, el.offsetTop + el.offsetHeight);
+    });
+    const pad = 140;
+    const w = maxX - minX + pad * 2;
+    const h = maxY - minY + pad * 2;
+    const s = Math.min(window.innerWidth / w, window.innerHeight / h, 1);
+    const cx = (minX + maxX) / 2;
+    const cy = (minY + maxY) / 2;
+    setSmooth(true);
+    setScale(s);
+    setTx(window.innerWidth / 2 - cx * s);
+    setTy(window.innerHeight / 2 - cy * s);
+    setHintGone(true);
+  };
+
+  useLayoutEffect(() => {
+    measure();
+    const t = setTimeout(() => centerOn('intro'), 60);
+    const onResize = () => { measure(); };
+    window.addEventListener('resize', onResize);
+    return () => { clearTimeout(t); window.removeEventListener('resize', onResize); };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // pan handlers
+  const onPointerDown = (e: React.PointerEvent) => {
+    if ((e.target as HTMLElement).closest('[data-node]')) return; // let nodes handle their own input
+    drag.current = { on: true, sx: e.clientX, sy: e.clientY, tx, ty, moved: false };
+    setSmooth(false);
+    (e.currentTarget as HTMLElement).setPointerCapture(e.pointerId);
+  };
+  const onPointerMove = (e: React.PointerEvent) => {
+    if (!drag.current.on) return;
+    const dx = e.clientX - drag.current.sx;
+    const dy = e.clientY - drag.current.sy;
+    if (Math.abs(dx) + Math.abs(dy) > 3) { drag.current.moved = true; setHintGone(true); }
+    setTx(drag.current.tx + dx);
+    setTy(drag.current.ty + dy);
+  };
+  const onPointerUp = () => { drag.current.on = false; };
+
+  const onWheel = (e: React.WheelEvent) => {
+    setSmooth(false);
+    setTx((v) => v - e.deltaX);
+    setTy((v) => v - e.deltaY);
+    setHintGone(true);
+  };
+
+  const intro = centers['intro'];
+
+  return (
+    <div
+      className="fixed inset-0 overflow-hidden"
+      style={{ cursor: drag.current.on ? 'grabbing' : 'grab', touchAction: 'none' }}
+      onPointerDown={onPointerDown}
+      onPointerMove={onPointerMove}
+      onPointerUp={onPointerUp}
+      onPointerLeave={onPointerUp}
+      onWheel={onWheel}
+    >
+      {/* top nav */}
+      <header className="pointer-events-none fixed inset-x-0 top-0 z-30 flex items-center justify-between px-6 py-5 md:px-10">
+        <button onClick={() => centerOn('intro')} className="pointer-events-auto serif text-xl text-[hsl(var(--cream))] hover:opacity-70">
+          Ashwin Ugale
+        </button>
+        <nav className="pointer-events-auto hidden items-center gap-5 md:flex">
+          {NODES.map((n) => (
+            <button
+              key={n.id}
+              onClick={() => centerOn(n.id)}
+              className={`text-[12px] uppercase tracking-[0.18em] transition-colors ${
+                active === n.id ? 'text-[hsl(var(--accent))]' : 'text-[hsl(var(--cream)/0.45)] hover:text-[hsl(var(--cream))]'
+              }`}
+            >
+              {n.label}
+            </button>
+          ))}
+          <button onClick={overview} className="text-[12px] uppercase tracking-[0.18em] text-[hsl(var(--cream)/0.45)] hover:text-[hsl(var(--cream))]">Map</button>
+        </nav>
+        <button onClick={overview} className="pointer-events-auto text-[12px] uppercase tracking-[0.18em] text-[hsl(var(--cream)/0.5)] md:hidden">Map</button>
+      </header>
+
+      {/* plane */}
+      <div
+        ref={planeRef}
+        className="absolute left-0 top-0"
+        style={{
+          width: 2600, height: 1900,
+          transform: `translate(${tx}px, ${ty}px) scale(${scale})`,
+          transformOrigin: '0 0',
+          transition: smooth ? 'transform .8s cubic-bezier(.16,1,.3,1)' : 'none',
+        }}
+      >
+        {/* faint dot grid that moves with the canvas */}
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{
+            backgroundImage: 'radial-gradient(circle, rgba(236,232,225,0.05) 1px, transparent 1px)',
+            backgroundSize: '46px 46px',
+          }}
+        />
+        {/* spokes from intro to each node */}
+        <svg className="pointer-events-none absolute inset-0 h-full w-full" style={{ overflow: 'visible' }}>
+          {intro && NODES.filter((n) => n.id !== 'intro').map((n) => {
+            const c = centers[n.id];
+            if (!c) return null;
+            return <line key={n.id} x1={intro.cx} y1={intro.cy} x2={c.cx} y2={c.cy}
+              stroke="rgba(236,232,225,0.08)" strokeWidth={1} />;
+          })}
+        </svg>
+
+        {NODES.map((n) => (
+          <div
+            key={n.id}
+            data-node
+            ref={(el) => { if (el) nodeRefs.current.set(n.id, el); }}
+            className="absolute"
+            style={{ left: n.x, top: n.y, width: n.w }}
+          >
+            {n.el}
+          </div>
+        ))}
+      </div>
+
+      {/* hint */}
+      <div className={`pointer-events-none fixed bottom-5 left-1/2 z-30 -translate-x-1/2 text-[11px] uppercase tracking-[0.25em] text-[hsl(var(--cream)/0.35)] transition-opacity duration-700 ${hintGone ? 'opacity-0' : 'opacity-100'}`}>
+        drag to explore
+      </div>
+    </div>
+  );
+};
+
+export default CanvasPortfolio;

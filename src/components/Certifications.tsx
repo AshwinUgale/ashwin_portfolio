@@ -19,7 +19,7 @@ const Certifications = () => (
     <div className="grid gap-4 md:grid-cols-2">
       {certs.map((c, i) => (
         <Reveal key={c.name} delay={i * 90}>
-          <a href={c.url} target="_blank" rel="noopener noreferrer" className="surface ticks group flex h-full items-center gap-5 p-5">
+          <a href={c.url} target="_blank" rel="noopener noreferrer" className="surface group flex h-full items-center gap-5 p-5">
             <img src={c.badge} alt={c.name} className="h-24 w-24 shrink-0 object-contain" />
             <div className="min-w-0">
               <div className="flex items-center gap-1.5 font-display text-base font-semibold leading-snug text-white">
