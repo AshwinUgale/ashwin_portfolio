@@ -124,6 +124,13 @@ const projects: Proj[] = [
     links: [['Marketplace', 'https://marketplace.visualstudio.com/items?itemName=AshwinUgale.docchat'], ['Code', 'https://github.com/AshwinUgale/docchat']],
   },
   {
+    title: 'Muteval', channel: 'PyPI · npm',
+    line: 'Mutation testing for LLM eval suites — it deliberately degrades your prompt, context, or model, reruns your existing evals against each “mutant”, and reports which regressions your tests miss.',
+    metrics: ['finds eval blind spots', 'DeepEval / RAGAS / promptfoo'],
+    tags: ['Python', 'TypeScript', 'Evals', 'CI'],
+    links: [['PyPI', 'https://pypi.org/project/muteval/'], ['Code', 'https://github.com/AshwinUgale/muteval']],
+  },
+  {
     title: 'Mneme', channel: 'PyPI · smolAmem',
     line: 'Multi-tier long-term memory for LLM agents with four pluggable storage backends and decay-based forgetting.',
     metrics: ['recall@5 = 1.000', '<50% token cost'],
@@ -150,7 +157,7 @@ export const ProjectsNode = () => (
   <div>
     <Heading>Projects</Heading>
     <p className="-mt-3 mb-6 max-w-xl text-[14px] leading-relaxed text-[hsl(var(--cream)/0.55)]">
-      Four production AI projects shipped to PyPI, the VS Code Marketplace, and the MCP ecosystem —
+      Five production AI projects shipped to PyPI, the VS Code Marketplace, and the MCP ecosystem —
       each gated by a labeled eval.
     </p>
     <div className="grid gap-4 sm:grid-cols-2">

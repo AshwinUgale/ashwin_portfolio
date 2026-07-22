@@ -3,6 +3,13 @@ import { KnowledgeChunk } from './portfolioKnowledge';
 // Extra coverage so more questions land. Public-safe, same format.
 export const EXTRA: KnowledgeChunk[] = [
   {
+    id: 'muteval',
+    title: 'Muteval (mutation testing for evals)',
+    keywords: 'muteval mutation testing evals eval suite coverage survivors deepeval ragas promptfoo pypi npm mutation score',
+    text:
+      "Muteval is mutation testing for LLM eval suites, published to PyPI and npm. It deliberately degrades the thing under test — the prompt, retrieved context, or model — reruns your existing evals against each degraded 'mutant', and reports a mutation score: the share of injected regressions your evals actually caught. The ones they miss are survivors — concrete blind spots in your eval coverage. It ships adapters for DeepEval, RAGAS, and promptfoo and can gate CI with a --fail-under threshold.",
+  },
+  {
     id: 'current-role',
     title: 'Current role',
     keywords: 'where do you work currently current company employer job role now present which company who do you work for currently working position title',
