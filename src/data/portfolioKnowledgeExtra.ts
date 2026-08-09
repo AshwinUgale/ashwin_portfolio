@@ -7,7 +7,28 @@ export const EXTRA: KnowledgeChunk[] = [
     title: 'Muteval (mutation testing for evals)',
     keywords: 'muteval mutation testing evals eval suite coverage survivors deepeval ragas promptfoo pypi npm mutation score',
     text:
-      "Muteval is mutation testing for LLM eval suites, published to PyPI and npm. It deliberately degrades the thing under test — the prompt, retrieved context, or model — reruns your existing evals against each degraded 'mutant', and reports a mutation score: the share of injected regressions your evals actually caught. The ones they miss are survivors — concrete blind spots in your eval coverage. It ships adapters for DeepEval, RAGAS, and promptfoo and can gate CI with a --fail-under threshold.",
+      "Muteval is mutation testing for LLM eval suites, published to PyPI. It deliberately degrades the thing under test — the prompt, retrieved context, tool outputs, or model — reruns your existing evals against each degraded 'mutant', and reports a mutation score: the share of injected regressions your evals actually caught. The ones they miss are survivors — concrete blind spots in your eval coverage. Its killer property is absence detection: it can tell you that you have no eval for a behavior at all. It ships adapters for DeepEval, RAGAS, and promptfoo and can gate CI with a --fail-under threshold. One-sentence question: would your eval suite actually catch a regression?",
+  },
+  {
+    id: 'tracelint',
+    title: 'tracelint (linter for agent runs)',
+    keywords: 'tracelint linter agent trace tool calling structural defects deterministic rules langfuse otel opentelemetry openinference trail fault injector recovery scorecard pypi ci exit code hallucinated arguments loops',
+    text:
+      "tracelint is a deterministic linter for agent execution traces, on PyPI. After a tool-calling agent runs, it reads the trace and flags structural defects — schema-violating calls, ignored tool errors, hallucinated arguments, loops, redundant calls — each with the exact trace lines as evidence and a CI exit code. No model ever judges it; the checks are structurally decidable. It has adapters for OpenAI messages, Langfuse, and OpenTelemetry/OpenInference, and was validated on real Langfuse v4 runs and real TRAIL benchmark traces. It also ships a fault injector and a per-fault recovery scorecard. One-sentence question: did the agent run violate structural expectations?",
+  },
+  {
+    id: 'goldset',
+    title: 'goldset (Golden-Set Builder)',
+    keywords: 'goldset golden set builder regression test suite curation traffic logs clustering dedup coverage drift pii redaction promptfoo human confirmation nli memory scenarios bitext',
+    text:
+      "goldset turns real traffic and traces into a versioned regression test suite — deduplicated, coverage-tracked, and drift-aware — with a mandatory human or oracle confirmation step. Its spine: you can't bootstrap ground truth from ungraded logs, so nothing is exported as 'golden' until a human confirms it and it carries a contract. It clusters inputs into intents, mines failures and rare cases, redacts PII before storing, and exports a promptfoo suite. Validated on the Bitext support corpus at 0.99 category purity and 96% coverage. It's a curation accelerator, not a gold factory, and is installed from GitHub. One-sentence question: are our regression cases representative and trustworthy?",
+  },
+  {
+    id: 'retrieval-lab',
+    title: 'Retrieval Lab (RAG retrieval benchmark)',
+    keywords: 'retrieval lab rag benchmark chunking embeddings dense bm25 hybrid rerank reranking hnsw ann failure attribution stage hit mrr squad beir pypi',
+    text:
+      "Retrieval Lab benchmarks RAG retrieval configurations on your own corpus and, for every failed query, attributes the miss to the exact pipeline stage that lost the evidence — representation, ANN index, candidate generation, fusion, reranker demotion, or the final/budget cutoff. It compares chunking strategies, embedding models, dense/BM25/hybrid retrieval, reranking, and exact-vs-HNSW indexes, and produces a self-contained HTML report with ranked configs, hit@k, MRR, confidence intervals, and latency. Gold answers use source-document character spans so evaluation stays stable as chunking changes. It's on PyPI. One-sentence question: which retrieval config wins, and where did the misses get lost?",
   },
   {
     id: 'current-role',

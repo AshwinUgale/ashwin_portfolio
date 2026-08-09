@@ -1,4 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { PROJECTS } from '@/data/projects';
+import Motif from '@/components/work/Motif';
 
 const L = {
   resume: '/Ashwin_Ugale_resume.pdf',
@@ -114,72 +117,35 @@ export const ExperienceNode = () => (
 );
 
 /* ---------- Selected work ---------- */
-type Proj = { title: string; channel: string; line: string; metrics: string[]; tags: string[]; links: [string, string][] };
-const projects: Proj[] = [
-  {
-    title: 'DocChat', channel: 'VS Code Marketplace',
-    line: 'Version-pinned library-docs Q&A in VS Code — answers from the exact version your lockfile pins, and refuses instead of hallucinating.',
-    metrics: ['0.943 version-correct', '1.000 refusal', '48-pair eval'],
-    tags: ['TypeScript', 'FastAPI', 'Qdrant', 'ReAct'],
-    links: [['Marketplace', 'https://marketplace.visualstudio.com/items?itemName=AshwinUgale.docchat'], ['Code', 'https://github.com/AshwinUgale/docchat']],
-  },
-  {
-    title: 'Muteval', channel: 'PyPI · npm',
-    line: 'Mutation testing for LLM eval suites — it deliberately degrades your prompt, context, or model, reruns your existing evals against each “mutant”, and reports which regressions your tests miss.',
-    metrics: ['finds eval blind spots', 'DeepEval / RAGAS / promptfoo'],
-    tags: ['Python', 'TypeScript', 'Evals', 'CI'],
-    links: [['PyPI', 'https://pypi.org/project/muteval/'], ['Code', 'https://github.com/AshwinUgale/muteval']],
-  },
-  {
-    title: 'Mneme', channel: 'PyPI · smolAmem',
-    line: 'Multi-tier long-term memory for LLM agents with four pluggable storage backends and decay-based forgetting.',
-    metrics: ['recall@5 = 1.000', '<50% token cost'],
-    tags: ['Python', 'Qdrant', 'pgvector', 'APScheduler'],
-    links: [['PyPI', 'https://pypi.org/project/smolAmem/'], ['Docs', 'https://ashwinugale.github.io/mneme/'], ['Code', 'https://github.com/AshwinUgale/mneme']],
-  },
-  {
-    title: 'ToolPicker', channel: 'PyPI · toolpicker',
-    line: 'Hybrid BM25 + semantic tool router with intent reranking and Reciprocal Rank Fusion, plus a token-budget packer.',
-    metrics: ['BM25 + semantic + intent', 'ToolBench / Gorilla'],
-    tags: ['Python', 'rank-bm25', 'scikit-learn'],
-    links: [['PyPI', 'https://pypi.org/project/toolpicker/'], ['Docs', 'https://ashwinugale.github.io/toolpicker/'], ['Code', 'https://github.com/AshwinUgale/toolpicker']],
-  },
-  {
-    title: 'docchat-server', channel: 'PyPI · MCP server',
-    line: 'DocChat’s retrieval engine as a Model Context Protocol server for Claude Code, Cursor, and Cline.',
-    metrics: ['FastMCP + Qdrant', 'search_docs / list_indexed'],
-    tags: ['Python', 'MCP', 'FastMCP'],
-    links: [['PyPI', 'https://pypi.org/project/docchat-server/'], ['Code', 'https://github.com/AshwinUgale/docchat-mcp']],
-  },
-];
-
 export const ProjectsNode = () => (
   <div>
     <Heading>Projects</Heading>
     <p className="-mt-3 mb-6 max-w-xl text-[14px] leading-relaxed text-[hsl(var(--cream)/0.55)]">
-      Five production AI projects shipped to PyPI, the VS Code Marketplace, and the MCP ecosystem —
-      each gated by a labeled eval.
+      Eight production AI projects across PyPI, the VS Code Marketplace, and the MCP ecosystem — a
+      reliability toolkit and the application it proves itself on. Each opens a full case study.
     </p>
     <div className="grid gap-4 sm:grid-cols-2">
-      {projects.map((p) => (
-        <article key={p.title} className="panel flex flex-col p-5">
-          <div className="flex items-baseline justify-between gap-2">
-            <span className="serif text-xl text-[hsl(var(--cream))]">{p.title}</span>
+      {PROJECTS.map((p) => (
+        <Link
+          key={p.slug}
+          to={`/work/${p.slug}`}
+          style={{ ['--accent' as string]: p.theme.accent }}
+          className="work-card group flex flex-col p-5"
+        >
+          <div className="flex items-start justify-between gap-2">
+            <span className="h-9 w-9 shrink-0"><Motif id={p.theme.motif} /></span>
             <span className="text-[10px] uppercase tracking-wider text-[hsl(var(--cream)/0.42)]">{p.channel}</span>
           </div>
-          <p className="mt-2 text-[13.5px] leading-relaxed text-[hsl(var(--cream)/0.66)]">{p.line}</p>
-          <div className="mt-3 flex flex-wrap gap-1.5">
-            {p.metrics.map((m) => (
-              <span key={m} className="pill" style={{ borderColor: 'rgba(230,179,90,0.3)', color: 'hsl(var(--accent))' }}>{m}</span>
-            ))}
+          <div className="mt-3 serif text-xl text-[hsl(var(--cream))]">{p.name}</div>
+          <p className="serif-i mt-1 text-[13.5px] leading-snug text-[hsl(var(--accent))]">{p.question}</p>
+          <p className="mt-2 text-[13px] leading-relaxed text-[hsl(var(--cream)/0.62)]">{p.tagline}</p>
+          <div className="mt-auto flex items-center gap-2 pt-4 text-[12.5px] text-[hsl(var(--cream)/0.55)] transition-colors group-hover:text-[hsl(var(--accent))]">
+            Read the case study →
           </div>
-          <div className="mt-2"><Pills items={p.tags} /></div>
-          <div className="mt-auto flex gap-x-4 pt-4 text-[13px]">
-            {p.links.map(([l, h]) => <Ext key={l} href={h}>{l}</Ext>)}
-          </div>
-        </article>
+        </Link>
       ))}
     </div>
+    <Link to="/work" className="ed-link accent mt-6 inline-block text-[13.5px]">View all work →</Link>
   </div>
 );
 

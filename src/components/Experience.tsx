@@ -5,7 +5,7 @@ import Reveal from './Reveal';
 const featured = {
   company: 'Enidus USA',
   role: 'Software Engineer — AI / LLM Platform',
-  location: 'Remote, NY (US)',
+  location: 'New York',
   dates: 'AUG 2025 — NOW',
   metrics: [
     { v: '50+', l: 'tools' },

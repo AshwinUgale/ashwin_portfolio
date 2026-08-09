@@ -58,10 +58,44 @@ export function retrieve(query: string, k = 4): { chunk: KnowledgeChunk; score: 
     .slice(0, k);
 }
 
+// Generic intent words that carry no subject. A question made only of these ("what
+// problem does it solve?", "how does it work?", "tell me more") is a follow-up about
+// whatever was just discussed — not a new topic.
+const GENERIC = new Set([
+  'problem', 'problems', 'solve', 'solves', 'solved', 'solving', 'make', 'makes', 'made',
+  'build', 'builds', 'built', 'thing', 'things', 'stuff', 'good', 'better', 'best', 'hard',
+  'easy', 'mean', 'means', 'explain', 'detail', 'details', 'example', 'examples', 'point',
+  'points', 'benefit', 'benefits', 'matter', 'important', 'special', 'unique',
+  'different', 'difference', 'differ', 'apart', 'compare', 'comparison', 'versus',
+  'limitation', 'limitations', 'downside', 'downsides', 'tradeoff', 'tradeoffs',
+  'its', 'their', 'theirs', 'one', 'ones', 'work', 'works', 'working',
+]);
+
+function isFollowUp(query: string): boolean {
+  // After tokenising (which already drops stopwords like how/what/does/it/use), a
+  // follow-up has no remaining subject noun.
+  return tokenize(query).filter((t) => !GENERIC.has(t)).length === 0;
+}
+
+// Build a retrieval query that stays on topic across turns. For a follow-up, anchor
+// hard to the recent user turns (repeated so the topic dominates generic body matches);
+// for a question that names its own subject, trust the question so new topics still win.
+function retrievalText(query: string, history: ChatMessage[]): string {
+  const recentUser = history
+    .filter((m) => m.role === 'user')
+    .slice(-2)
+    .map((m) => m.content)
+    .join(' ');
+  if (recentUser && isFollowUp(query)) {
+    return `${recentUser} ${recentUser} ${query}`.trim();
+  }
+  return query;
+}
+
 // Build grounding context for the LLM. Always include the identity summary so the
 // model knows who Ashwin is, then the top topical matches (deduped).
-function buildContext(query: string): { context: string; sources: string[] } {
-  const hits = retrieve(query, 5);
+function buildContext(query: string, history: ChatMessage[] = []): { context: string; sources: string[] } {
+  const hits = retrieve(retrievalText(query, history), 6);
   const seen = new Set<string>();
   const chunks: KnowledgeChunk[] = [];
   const summary = KNOWLEDGE.find((c) => c.id === 'summary');
@@ -76,8 +110,8 @@ function buildContext(query: string): { context: string; sources: string[] } {
 const FALLBACK =
   "I can tell you about Ashwin's work at Enidus (the T-Mobile LLM agent platform), his open-source AI projects (DocChat, Mneme, ToolPicker, docchat-server), his eval methodology, hybrid retrieval, tech stack, experience, and how to reach him — but I don't have anything on that. Try one of those, or email ugaleashwin@gmail.com.";
 
-export function answerLocally(query: string): { text: string; sources: string[] } {
-  const hits = retrieve(query, 3);
+export function answerLocally(query: string, history: ChatMessage[] = []): { text: string; sources: string[] } {
+  const hits = retrieve(retrievalText(query, history), 3);
   if (hits.length === 0 || hits[0].score < 2) return { text: FALLBACK, sources: [] };
   // Return only the single best-matching chunk so the fallback reads as one coherent answer.
   return { text: hits[0].chunk.text, sources: [hits[0].chunk.title] };
@@ -111,8 +145,8 @@ export async function askPortfolio(
   const q = (query || '').trim().slice(0, 1000);
   if (!q) return { text: FALLBACK, sources: [], mode: 'local' };
 
-  const { context, sources } = buildContext(q);
   const trimmedHistory = history.filter((m) => m && m.content).slice(-6);
+  const { context, sources } = buildContext(q, trimmedHistory);
 
   if (CHAT_API_URL) {
     try {
@@ -127,5 +161,5 @@ export async function askPortfolio(
     }
   }
 
-  return { ...answerLocally(q), mode: 'local' };
+  return { ...answerLocally(q, trimmedHistory), mode: 'local' };
 }
