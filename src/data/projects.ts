@@ -47,7 +47,7 @@ export const PROJECTS: Project[] = [
     ],
     howItWorks: [
       'Baseline — confirms your suite passes on the original system; if it doesn’t, it refuses to score (fails closed).',
-      'Mutate — degrades the prompt, retrieved context, tool outputs, or model (18 operators).',
+      'Mutate — degrades the prompt, retrieved context, tool outputs, or model (22 operators).',
       'Grade — reruns your suite against each mutant. Killed = caught; survived = a gap.',
       'Score — the share of injected regressions your evals caught, with severity ranking and a suggested fix per survivor.',
       'Adapters for promptfoo, DeepEval, and RAGAS; a probe layer audits eval-suite quality.',
@@ -61,7 +61,7 @@ muteval run --config examples/promptfoo_offline/muteval_config.py --no-color
 muteval show 0        # a survivor + suggested fix + baseline→mutant diff`,
     },
     stats: [
-      { value: '18', label: 'mutation operators' },
+      { value: '22', label: 'mutation operators' },
       { value: '3', label: 'eval frameworks supported' },
       { value: '~190', label: 'tests' },
     ],
@@ -117,6 +117,7 @@ tracelint scorecard --demo --faults timeout,error,rate_limit --runs 5`,
       { value: '0', label: 'LLM calls to run' },
     ],
     findings: [
+      'Featured in a guest post on the Arize AI engineering blog (makers of Phoenix) — tracelint on Phoenix / OpenInference spans catches a LangGraph release agent that shipped a failed build, and fails CI with no LLM judge.',
       'Adapters validated on live data, not just spec — from_langfuse_trace on real Langfuse v4 runs, and from_otel_spans on real TRAIL benchmark traces (PatronusAI/TRAIL).',
       'On TRAIL it deterministically localized real tool errors, a malformed tool call, and excessive-retry loops — with no model in the loop.',
       'The recovery scorecard reports a correctness-recovery rate per fault type with a Wilson confidence interval.',
@@ -129,6 +130,7 @@ tracelint scorecard --demo --faults timeout,error,rate_limit --runs 5`,
     related: ['muteval', 'retrieval-lab'],
     tags: ['Python', 'Agents', 'OpenTelemetry', 'Langfuse', 'CI'],
     links: [
+      { label: 'Arize blog', href: 'https://arize.com/blog/agent-traces-without-llm-judge/', kind: 'ext' },
       { label: 'Live demo', href: 'https://ashwinugale.github.io/tracelint/', kind: 'demo' },
       { label: 'PyPI', href: 'https://pypi.org/project/tracelint/', kind: 'pkg' },
       { label: 'Code', href: 'https://github.com/AshwinUgale/tracelint', kind: 'repo' },

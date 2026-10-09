@@ -124,6 +124,33 @@ export const ProjectsNode = () => (
       Eight production AI projects across PyPI, the VS Code Marketplace, and the MCP ecosystem — a
       reliability toolkit and the application it proves itself on. Each opens a full case study.
     </p>
+
+    <a
+      href="https://arize.com/blog/agent-traces-without-llm-judge/"
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group mb-6 block rounded-[var(--radius)] border"
+      style={{ borderColor: 'hsl(var(--accent)/0.45)', background: 'hsl(var(--accent)/0.06)' }}
+    >
+      <div className="flex items-center gap-4 p-4">
+        <span
+          className="shrink-0 rounded-full px-2.5 py-1 text-[10px] font-medium uppercase tracking-[0.18em]"
+          style={{ background: 'hsl(var(--accent)/0.18)', color: 'hsl(var(--accent))' }}
+        >
+          Featured
+        </span>
+        <div className="min-w-0 flex-1">
+          <div className="truncate text-[14.5px] text-[hsl(var(--cream))]">
+            “What agent traces can tell you without an LLM judge”
+          </div>
+          <div className="mt-0.5 text-[12.5px] text-[hsl(var(--cream)/0.6)]">
+            Guest post on the Arize AI engineering blog — on <span className="text-[hsl(var(--cream)/0.8)]">tracelint</span>
+          </div>
+        </div>
+        <span className="shrink-0 text-[hsl(var(--cream)/0.5)] transition-colors group-hover:text-[hsl(var(--accent))]">↗</span>
+      </div>
+    </a>
+
     <div className="grid gap-4 sm:grid-cols-2">
       {PROJECTS.map((p) => (
         <Link

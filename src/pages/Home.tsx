@@ -83,6 +83,57 @@ const WorkCard = ({ p }: { p: Project }) => {
   );
 };
 
+/* ----------------------- featured deck ----------------------- */
+type Featured = { tag: string; title: string; note: string; href: string; image?: string };
+
+const FEATURED: Featured[] = [
+  {
+    tag: 'Arize AI engineering blog',
+    title: 'What agent traces can tell you without an LLM judge',
+    note: 'Guest post — running tracelint on Phoenix / OpenInference traces to fail CI, with no LLM judge.',
+    href: 'https://arize.com/blog/agent-traces-without-llm-judge/',
+    image: 'https://arize.com/wp-content/uploads/2026/10/tracelint-every-span-said-ok.jpg',
+  },
+];
+
+const HeroFeatured = () => (
+  <div className="reveal mt-10 border-t border-[hsl(var(--hair))] pt-6">
+    <div className="mb-4 text-[11px] uppercase tracking-[0.26em] text-[hsl(var(--dim))]">Featured</div>
+    <div className="no-scrollbar -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-1">
+      {FEATURED.map((f) => (
+        <a
+          key={f.href}
+          href={f.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="group flex w-[400px] shrink-0 snap-start items-stretch overflow-hidden rounded-lg border transition-colors"
+          style={{ borderColor: 'hsl(var(--hair))', background: 'hsl(var(--graphite)/0.02)' }}
+          onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'hsl(var(--accent)/0.5)')}
+          onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'hsl(var(--hair))')}
+        >
+          {f.image && (
+            <img
+              src={f.image}
+              alt=""
+              loading="lazy"
+              className="h-[104px] w-[142px] shrink-0 border-r border-[hsl(var(--hair))] object-cover opacity-85 transition-opacity group-hover:opacity-100"
+            />
+          )}
+          <div className="flex min-w-0 flex-1 flex-col justify-center gap-1.5 p-4">
+            <div className="flex items-center justify-between gap-2">
+              <span className="truncate text-[10px] font-medium uppercase tracking-[0.16em] text-[hsl(var(--dim))] transition-colors group-hover:text-[hsl(var(--accent))]">
+                {f.tag}
+              </span>
+              <span className="shrink-0 text-[13px] text-[hsl(var(--graphite)/0.35)] transition-colors group-hover:text-[hsl(var(--accent))]">↗</span>
+            </div>
+            <div className="line-clamp-2 text-[15px] font-medium leading-snug text-[hsl(var(--graphite)/0.9)]">{f.title}</div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+);
+
 const WorkIndexSection = () => (
   <StackSection id="work" className="mx-auto max-w-6xl scroll-mt-24 px-6 py-24">
     <div className="reveal mb-12 flex items-end justify-between gap-4">
@@ -190,6 +241,7 @@ const Home = () => {
               className="ed-link text-[14.5px]">See my projects</a>
           </div>
 
+          <HeroFeatured />
         </div>
         <div className="pointer-events-none absolute bottom-8 left-1/2 -translate-x-1/2 text-[11px] uppercase tracking-[0.24em] text-[hsl(var(--dim))]">Scroll ↓</div>
       </section>
